@@ -10,8 +10,15 @@ export default {
     Product6: require("./product6.png"),
     Product7: require("./product7.png"),
     Product8: require("./product8.png"),
-    Product8: require("./product8.png"),
     BgImage: require("./bg_image.png"),
+    EyeIcon: require("./eye.png"),
+    EyeOffIcon: require("./eye-off.png"),
+    GoogleIcon: require("./google.png"),
+   AppleIcon: require("./apple.png"),
+   LockIcon: require("./lock.png"),
+   EmailIcon: require("./mail.png"),
+   
+
 
 
 
