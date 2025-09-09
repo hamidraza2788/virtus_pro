@@ -1,22 +1,33 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from 'react';
-import { StatusBar, StyleSheet, useColorScheme } from 'react-native';
+import { 
+  StatusBar, 
+  StyleSheet, 
+  useColorScheme, 
+  Platform,
+  View 
+} from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Navigation } from './src/navigation';
 import { enableScreens } from 'react-native-screens';
+
 enableScreens();
+
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
+  const statusBarBackgroundColor = isDarkMode ? '#000000' : '#FFFFFF';
 
   return (
     <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      {Platform.OS === 'android' && (
+         <StatusBar 
+        translucent={true}
+        backgroundColor="transparent"
+        barStyle={isDarkMode ? 'light-content' : 'dark-content'} 
+      />
+      )}
+      {Platform.OS === 'ios' && (
+        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      )}
       <Navigation />
     </SafeAreaProvider>
   );

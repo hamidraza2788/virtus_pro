@@ -2,7 +2,14 @@ node_modules
 # Gradle build files
 android/.gradle/
 android/build/
-
+android/gradle/
+android/app/build/
+android/app/intermediates/
+android/app/generated/
+android/app/.cxx/
+android/app/.externalNativeBuild/
+android/captures/
+android/outputs/
 # IDE files (Android Studio)
 android/.idea/
 
