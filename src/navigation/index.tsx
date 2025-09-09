@@ -5,7 +5,7 @@ import {
   StaticParamList,
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Image, View } from "react-native";
+import { Image, Platform, View } from "react-native";
 import ImagePath from "../assets/images/ImagePath";
 
 
@@ -16,6 +16,7 @@ import LoginScreen from "./screens/LoginScreen";
 import DealerScreen from "./screens/DealerScreen";
 import CatalogScreen from "./screens/CatalogScreen";
 import ProfileScreen from "./screens/ProfileScreen";
+import SignupScreen from "./screens/SignupScreen";
 import { Colors } from "../utils";
 
 
@@ -59,7 +60,7 @@ const BottomTabNavigator = () => {
             borderTopWidth: 0,
             position: "absolute",
             marginHorizontal: 20, // This adds equal margin on left and right
-            bottom: 20,
+           bottom: Platform.OS === 'ios' ? 20 : 1,
             alignSelf: 'center', // Center the tab bar
           
           },
@@ -93,6 +94,12 @@ const RootStack = createNativeStackNavigator({
         headerShown: false,
       },
     },
+     Signup: {
+      screen: SignupScreen,
+      options: {
+        headerShown: false,
+      },
+    },
     HomeTabs: {
       screen: BottomTabNavigator,
       options: {
@@ -111,6 +118,7 @@ type RootStackParamList = {
   WelcomeScreen: undefined; // No params expected
     HomeTabs: undefined;
   Login:undefined;
+  Signup:undefined;
  
 };
 declare global {

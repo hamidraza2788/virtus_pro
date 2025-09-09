@@ -7,10 +7,16 @@ import { Colors } from '../../utils';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const LoginScreen = () => {
+const SignupScreen = () => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [address, setAddress] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigation = useNavigation();
 
   return (
@@ -25,9 +31,25 @@ const LoginScreen = () => {
           keyboardShouldPersistTaps="handled"
           showsVerticalScrollIndicator={false}
         >
-          <Text style={styles.title}>Hi! Login to Virtus Pro</Text>
-          <Text style={styles.subtitle}>Sign In to your account</Text>
+          <Text style={styles.title}>Welcome to Virtus Pro</Text>
+<Text style={styles.subtitle}>Create your account to continue</Text>
 
+<AppInput
+            placeholder="First Name"
+            icon={Images.userIcon}
+            value={firstName}
+            onChangeText={setFirstName}
+            keyboardType="default"
+            autoCapitalize="words"
+          />
+          <AppInput
+            placeholder="Last Name"
+            icon={Images.userIcon}
+            value={lastName}
+            onChangeText={setLastName}
+            keyboardType="default"
+            autoCapitalize="words"
+          />
           <AppInput
             placeholder="Type your email"
             icon={Images.EmailIcon}
@@ -35,6 +57,22 @@ const LoginScreen = () => {
             onChangeText={setEmail}
             keyboardType="email-address"
             autoCapitalize="none"
+          />
+          <AppInput
+            placeholder="Phone Number"
+            icon={Images.phoneIcon}
+            value={phone}
+            onChangeText={setPhone}
+            keyboardType="phone-pad"
+            // autoCapitalize="words"
+          />
+          <AppInput
+            placeholder="Address"
+            icon={Images.locationIcon}
+            value={address}
+            onChangeText={setAddress}
+            keyboardType="default"
+            autoCapitalize="words"
           />
           <AppInput
             placeholder="Type your password"
@@ -46,12 +84,19 @@ const LoginScreen = () => {
             autoCapitalize="none"
             onRightIconPress={() => setShowPassword(!showPassword)}
           />
+ <AppInput
+            placeholder="Confirm Password"
+            icon={Images.LockIcon}
+            rightIcon={showConfirmPassword ? Images.EyeIcon : Images.EyeOffIcon}
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
+            secureTextEntry={!showConfirmPassword}
+            autoCapitalize="none"
+            onRightIconPress={() => setShowConfirmPassword(!showConfirmPassword)}
+          />
+         
 
-          <TouchableOpacity style={styles.forgotBtn}>
-            <Text style={styles.forgotText}>Forgot Password?</Text>
-          </TouchableOpacity>
-
-          <AppButton title="Sign In" onPress={() => { navigation.navigate('HomeTabs') }} style={styles.signInBtn} />
+          <AppButton title="Sign Up" onPress={() => { navigation.navigate('Login') }} style={styles.signInBtn} />
 
           <View style={styles.orRow}>
             <View style={styles.line} />
@@ -69,9 +114,9 @@ const LoginScreen = () => {
           </TouchableOpacity>
 
           <View style={styles.signupRow}>
-            <Text style={styles.signupText}>Don't have an account? </Text>
-            <TouchableOpacity onPress={() => { navigation.navigate('Signup') }}>
-              <Text style={styles.signupLink}>Sign Up</Text>
+            <Text style={styles.signupText}>Already have an account? </Text>
+            <TouchableOpacity onPress={() => { navigation.navigate('Login') }}>
+              <Text style={styles.signupLink}>Sign In</Text>
             </TouchableOpacity>
           </View>
 
@@ -85,7 +130,7 @@ const LoginScreen = () => {
   );
 };
 
-export default LoginScreen;
+export default SignupScreen;
 
 const styles = StyleSheet.create({
   container: {

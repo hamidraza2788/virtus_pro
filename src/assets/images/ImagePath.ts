@@ -27,6 +27,10 @@ export default {
     Product11: require("./product11.png"),
     Product22: require("./product22.png"),
     Product33: require("./product33.png"),
+    userIcon: require("./user.png"),
+    locationIcon: require("./location.png"),
+    phoneIcon: require("./phone.png"),
+    LogoutIcon: require("./logout.png"),
    
 
 
