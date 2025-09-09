@@ -1,54 +1,37 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import Images from '../../assets/images/ImagePath';
+import { View, ScrollView, StyleSheet } from 'react-native';
+import HomeHeader from '../../components/HomeHeader';
+import SearchBar from '../../components/SearchBar';
+import CategoryChips from '../../components/CategoryChips';
+import { Colors } from '../../utils';
+import FeaturedProductsCarousel from '../../components/FeaturedProductsCarousel';
+import SectionHeader from '../../components/SectionHeader';
+import TabChips from '../../components/TabChips';
+import ProductList from '../../components/ProductList';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 
 const HomeScreen = () => {
   return (
-    <View style={styles.container}>
-      {/* <Image source={Images.profile} style={styles.image} /> */}
-      <Text style={styles.title}>Home to Virtus Pro!</Text>
-      <Text style={styles.subtitle}>Your journey starts here.</Text>
-     
-    </View>
+    <SafeAreaView style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <HomeHeader />
+        <SearchBar />
+        <CategoryChips />
+        <FeaturedProductsCarousel />
+        <SectionHeader title="Recommended For You" showSeeAll />
+        <TabChips />
+        <ProductList /> 
+      </ScrollView>
+    </SafeAreaView>
   );
 };
+
 export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#fff',
-    padding: 24,
-  },
-  image: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    marginBottom: 32,
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    marginBottom: 12,
-    color: '#222',
-  },
-  subtitle: {
-    fontSize: 16,
-    color: '#666',
-    marginBottom: 32,
-    textAlign: 'center',
-  },
-  button: {
-    backgroundColor: '#007AFF',
-    paddingVertical: 14,
-    paddingHorizontal: 40,
-    borderRadius: 30,
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: '600',
+    backgroundColor: Colors.Background,
   },
 });

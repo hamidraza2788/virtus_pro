@@ -17,6 +17,16 @@ export default {
    AppleIcon: require("./apple.png"),
    LockIcon: require("./lock.png"),
    EmailIcon: require("./mail.png"),
+   HomeIcon: require("./home.png"),
+   CateIcon: require("./file.png"),
+    CartIcon: require("./shopping-cart.png"),
+    ProfileIcon: require("./headphone.png"),
+    BellIcon: require("./bell.png"),
+    SearchIcon: require("./search.png"),
+    FilterIcon: require("./filter.png"),
+    Product11: require("./product11.png"),
+    Product22: require("./product22.png"),
+    Product33: require("./product33.png"),
    
 
 

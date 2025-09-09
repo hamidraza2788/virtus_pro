@@ -1,72 +1,87 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import AppInput from '../../components/AppInput';
 import AppButton from '../../components/AppButton';
 import Images from '../../assets/images/ImagePath';
 import { Colors } from '../../utils';
+import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const navigation = useNavigation();
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Hi! Login to Virtus Pro</Text>
-      <Text style={styles.subtitle}>Sign In to your account</Text>
+    <SafeAreaView style={styles.container}>
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 24}
+      >
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
+        >
+          <Text style={styles.title}>Hi! Login to Virtus Pro</Text>
+          <Text style={styles.subtitle}>Sign In to your account</Text>
 
-      <AppInput
-        placeholder="Type your email"
-        icon={Images.EmailIcon}
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
-        autoCapitalize="none"
-      />
-      <AppInput
-        placeholder="Type your password"
-        icon={Images.LockIcon}
-        rightIcon={showPassword ? Images.EyeIcon : Images.EyeOffIcon}
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry={!showPassword}
-        autoCapitalize="none"
-        onRightIconPress={() => setShowPassword(!showPassword)}
-      />
+          <AppInput
+            placeholder="Type your email"
+            icon={Images.EmailIcon}
+            value={email}
+            onChangeText={setEmail}
+            keyboardType="email-address"
+            autoCapitalize="none"
+          />
+          <AppInput
+            placeholder="Type your password"
+            icon={Images.LockIcon}
+            rightIcon={showPassword ? Images.EyeIcon : Images.EyeOffIcon}
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry={!showPassword}
+            autoCapitalize="none"
+            onRightIconPress={() => setShowPassword(!showPassword)}
+          />
 
-      <TouchableOpacity style={styles.forgotBtn}>
-        <Text style={styles.forgotText}>Forgot Password?</Text>
-      </TouchableOpacity>
+          <TouchableOpacity style={styles.forgotBtn}>
+            <Text style={styles.forgotText}>Forgot Password?</Text>
+          </TouchableOpacity>
 
-      <AppButton title="Sign In" onPress={() => {}} style={styles.signInBtn} />
+          <AppButton title="Sign In" onPress={() => { navigation.navigate('HomeTabs') }} style={styles.signInBtn} />
 
-      <View style={styles.orRow}>
-        <View style={styles.line} />
-        <Text style={styles.orText}>Or sign in with</Text>
-        <View style={styles.line} />
-      </View>
+          <View style={styles.orRow}>
+            <View style={styles.line} />
+            <Text style={styles.orText}>Or sign in with</Text>
+            <View style={styles.line} />
+          </View>
 
-      <TouchableOpacity style={styles.socialBtn}>
-        <Image source={Images.AppleIcon} style={styles.socialIcon} />
-        <Text style={styles.socialText}>Sign In with Apple</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.socialBtn}>
-        <Image source={Images.GoogleIcon} style={styles.socialIcon} />
-        <Text style={styles.socialText}>Sign In with Google</Text>
-      </TouchableOpacity>
+          <TouchableOpacity style={styles.socialBtn}>
+            <Image source={Images.AppleIcon} style={styles.socialIcon} />
+            <Text style={styles.socialText}>Sign In with Apple</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.socialBtn}>
+            <Image source={Images.GoogleIcon} style={styles.socialIcon} />
+            <Text style={styles.socialText}>Sign In with Google</Text>
+          </TouchableOpacity>
 
-      <View style={styles.signupRow}>
-        <Text style={styles.signupText}>Don't have an account? </Text>
-        <TouchableOpacity>
-          <Text style={styles.signupLink}>Sign Up</Text>
-        </TouchableOpacity>
-      </View>
+          <View style={styles.signupRow}>
+            <Text style={styles.signupText}>Don't have an account? </Text>
+            <TouchableOpacity>
+              <Text style={styles.signupLink}>Sign Up</Text>
+            </TouchableOpacity>
+          </View>
 
-      <Text style={styles.termsText}>
-        By using our services you are agreeing to our{' '}
-        <Text style={styles.link}>Terms</Text> and <Text style={styles.link}>Privacy Policy</Text>
-      </Text>
-    </View>
+          <Text style={styles.termsText}>
+            By using our services you are agreeing to our{' '}
+            <Text style={styles.link}>Terms</Text> and <Text style={styles.link}>Privacy Policy</Text>
+          </Text>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
