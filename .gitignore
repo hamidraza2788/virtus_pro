@@ -1,1 +1,10 @@
 node_modules
+# Gradle build files
+android/.gradle/
+android/build/
+
+# IDE files (Android Studio)
+android/.idea/
+
+# React Native iOS build files
+ios/build/
