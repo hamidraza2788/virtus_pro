@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity, Dimensions, Platform } from 'react-native';
 import ImagePath from '../assets/images/ImagePath';
 
 
@@ -39,7 +39,7 @@ const CatalogGrid = () => (
 const styles = StyleSheet.create({
   list: {
     paddingHorizontal: 20,
-    paddingBottom: 50,
+    paddingBottom: Platform.OS === 'ios' ? 50 : 60,
     paddingTop: 8,
   },
   card: {

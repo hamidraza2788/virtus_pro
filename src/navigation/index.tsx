@@ -5,8 +5,10 @@ import {
   StaticParamList,
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Image, View } from "react-native";
+import { Image, Platform, View } from "react-native";
 import ImagePath from "../assets/images/ImagePath";
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 
 
 import React from "react";
@@ -16,6 +18,7 @@ import LoginScreen from "./screens/LoginScreen";
 import DealerScreen from "./screens/DealerScreen";
 import CatalogScreen from "./screens/CatalogScreen";
 import ProfileScreen from "./screens/ProfileScreen";
+import SignupScreen from "./screens/SignupScreen";
 import { Colors } from "../utils";
 
 
@@ -24,6 +27,7 @@ import { Colors } from "../utils";
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
+  const insets = useSafeAreaInsets();
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -52,17 +56,18 @@ const BottomTabNavigator = () => {
         },
         tabBarActiveTintColor: Colors.Purple,
         tabBarInactiveTintColor: Colors.White,
-         tabBarStyle: {
-            backgroundColor: Colors.Black,
-            borderRadius: 20,
-            height: 70,
-            borderTopWidth: 0,
-            position: "absolute",
-            marginHorizontal: 20, // This adds equal margin on left and right
-            bottom: 20,
-            alignSelf: 'center', // Center the tab bar
-          
-          },
+        tabBarStyle: {
+          backgroundColor: Colors.Black,
+          borderRadius: 20,
+          height: 70,
+          borderTopWidth: 0,
+          position: "absolute",
+          marginHorizontal: 20,
+          bottom: Platform.OS === 'ios' ? 20 : insets.bottom + 1,
+          alignSelf: 'center',
+          paddingTop: 8, // Added padding to give space for labels
+          paddingBottom: 10, // Added padding to give space for labels
+        },
         tabBarLabelStyle: {
           fontSize: 12,
           fontWeight: "600",
@@ -93,6 +98,12 @@ const RootStack = createNativeStackNavigator({
         headerShown: false,
       },
     },
+     Signup: {
+      screen: SignupScreen,
+      options: {
+        headerShown: false,
+      },
+    },
     HomeTabs: {
       screen: BottomTabNavigator,
       options: {
@@ -111,6 +122,7 @@ type RootStackParamList = {
   WelcomeScreen: undefined; // No params expected
     HomeTabs: undefined;
   Login:undefined;
+  Signup:undefined;
  
 };
 declare global {

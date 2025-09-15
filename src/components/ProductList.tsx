@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import ImagePath from '../assets/images/ImagePath';
 import { Colors } from '../utils';
 
@@ -38,7 +38,7 @@ const ProductList = () => (
   <FlatList
     data={products}
     keyExtractor={item => item.id}
-    contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 44 }}
+    contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: Platform.OS === 'ios' ? 44 : 64 }}
     renderItem={({ item }) => (
       <View style={styles.card}>
         <Image source={item.image} style={styles.image} />

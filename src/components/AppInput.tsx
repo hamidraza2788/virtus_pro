@@ -1,27 +1,64 @@
 import React from 'react';
-import { View, TextInput, StyleSheet, TextInputProps, Image, TouchableOpacity } from 'react-native';
+import { 
+  View, 
+  TextInput, 
+  StyleSheet, 
+  TextInputProps, 
+  Image, 
+  TouchableOpacity 
+} from 'react-native';
 import { Colors } from '../utils';
 
 interface AppInputProps extends TextInputProps {
   icon?: any;
   rightIcon?: any;
   onRightIconPress?: () => void;
+  disabled?: boolean;
 }
 
-const AppInput: React.FC<AppInputProps> = ({ icon, rightIcon, onRightIconPress, style, ...props }) => (
-<View style={styles.inputContainer}>
-    {icon && <Image source={icon} style={styles.icon} />}
+const AppInput: React.FC<AppInputProps> = ({ 
+  icon, 
+  rightIcon, 
+  onRightIconPress, 
+  style, 
+  disabled = false,
+  ...props 
+}) => (
+  <View style={[
+    styles.inputContainer, 
+    
+  ]}>
+    {icon && (
+      <Image 
+        source={icon} 
+        style={[
+          styles.icon, 
+          disabled && styles.disabledIcon
+        ]} 
+      />
+    )}
     <TextInput
-        style={[styles.input, style]}
-        placeholderTextColor={require('../utils/colors').GRAY}
-        {...props}
+      style={[styles.input, disabled && styles.disabledInput, style]}
+      placeholderTextColor={disabled ? Colors.LightGray : Colors.Gray}
+      editable={!disabled}
+      {...props}
     />
     {rightIcon && (
-        <TouchableOpacity onPress={onRightIconPress} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
-            <Image source={rightIcon} style={styles.rightIcon} />
-        </TouchableOpacity>
+      <TouchableOpacity 
+        onPress={onRightIconPress} 
+        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+        disabled={disabled}
+      >
+        <Image 
+          source={rightIcon} 
+          style={[
+            styles.rightIcon, 
+            disabled && styles.disabledIcon
+          ]} 
+        />
+      </TouchableOpacity>
     )}
-</View>
+  </View>
 );
 
 const styles = StyleSheet.create({
@@ -36,6 +73,10 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.White,
     height: 52,
   },
+  disabledContainer: {
+    backgroundColor: Colors.LightGray,
+    borderColor: Colors.LightGray,
+  },
   icon: {
     width: 20,
     height: 20,
@@ -48,11 +89,17 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     tintColor: Colors.LightBlue,
   },
+  disabledIcon: {
+    tintColor: Colors.LightGray,
+  },
   input: {
     flex: 1,
     fontSize: 16,
     color: Colors.Black,
     fontFamily: 'OpenSans-Regular',
+  },
+  disabledInput: {
+    color: Colors.Gray,
   },
 });
 
