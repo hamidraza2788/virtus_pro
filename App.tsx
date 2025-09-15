@@ -14,19 +14,24 @@ enableScreens();
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
-  const statusBarBackgroundColor = isDarkMode ? '#000000' : '#FFFFFF';
+  console.log("isDarkMode", isDarkMode);
+  
+  // For Android, we always want dark content regardless of dark mode
+  const androidBarStyle = 'dark-content';
+  // For iOS, follow system preference
+  const iosBarStyle = isDarkMode ? 'light-content' : 'dark-content';
 
   return (
     <SafeAreaProvider>
       {Platform.OS === 'android' && (
-         <StatusBar 
-        translucent={true}
-        backgroundColor="transparent"
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'} 
-      />
+        <StatusBar 
+          translucent={true}
+          backgroundColor="transparent"
+          barStyle={androidBarStyle} 
+        />
       )}
       {Platform.OS === 'ios' && (
-        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+        <StatusBar barStyle={iosBarStyle} />
       )}
       <Navigation />
     </SafeAreaProvider>

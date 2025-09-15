@@ -22,9 +22,9 @@ const SignupScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
-        style={{ flex: 1 }}
+        style={{   }}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 24}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 1}
       >
         <ScrollView
           contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.White,
     padding: 24,
-    justifyContent: 'center',
+    // justifyContent: 'center',
   },
   title: {
     fontSize: 32,

@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.White,
     padding: 24,
-    justifyContent: 'center',
+    // justifyContent: 'center',
   },
   title: {
     fontSize: 32,
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
     color: Colors.Gray,
     fontSize: 12,
     textAlign: 'center',
-    marginTop: 30,
+    marginTop: 60,
     fontFamily: 'OpenSans-Regular',
     lineHeight: 16,
    
