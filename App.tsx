@@ -7,21 +7,26 @@ import {
   View 
 } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Provider } from 'react-redux';
 import { Navigation } from './src/navigation';
+
 import { enableScreens } from 'react-native-screens';
+import { store } from './src/redux/store';
 
 enableScreens();
 
 function App() {
   return (
-    <SafeAreaProvider>
-      <StatusBar 
-        barStyle="dark-content"
-        backgroundColor="transparent"
-        translucent={Platform.OS === 'android'}
-      />
-      <Navigation />
-    </SafeAreaProvider>
+    <Provider store={store}>
+      <SafeAreaProvider>
+        <StatusBar 
+          barStyle="dark-content"
+          backgroundColor="transparent"
+          translucent={Platform.OS === 'android'}
+        />
+        <Navigation />
+      </SafeAreaProvider>
+    </Provider>
   );
 }
 
