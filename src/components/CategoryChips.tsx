@@ -33,10 +33,10 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     marginRight: 10,
     borderWidth: 1,
-    borderColor: Colors.LightGray,
+    borderColor: Colors.secondary,
   },
   chipActive: {
-    backgroundColor: Colors.Black,
+    backgroundColor: Colors.primary,
     borderColor: Colors.Black,
   },
   chipText: { color: Colors.Black, fontWeight: '600',fontSize:12 },

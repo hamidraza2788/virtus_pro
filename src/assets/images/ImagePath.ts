@@ -1,4 +1,5 @@
 export default {
+    Logo: require("./logo.webp"),
     Profile: require("./Profile.png"),
     SlideImage1: require("./slider1.png"),
     SlideImage2: require("./slider2.png"),

@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   },
   price: {
     fontSize: 12,
-    color: Colors.Gray,
+    color: Colors.secondary,
   },
 });
 

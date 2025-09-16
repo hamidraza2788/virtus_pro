@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   seeAll: {
-    color: Colors.Purple,
+    color: Colors.primary,
     fontWeight: '600',
     fontSize: 16,
   },

@@ -5,13 +5,13 @@ import { Colors } from '../utils';
 
 const SearchBar = () => (
 <View style={styles.container}>
-    <Image source={Images.SearchIcon} style={[styles.icon, { tintColor: Colors.LightBlue }]} />
+    <Image source={Images.SearchIcon} style={[styles.icon, { tintColor: Colors.secondary }]} />
     <TextInput
         style={styles.input}
         placeholder="Search"
-        placeholderTextColor={Colors.LightBlue}
+        placeholderTextColor={Colors.secondary}
     />
-    <Image source={Images.FilterIcon} style={[styles.icon, { tintColor: Colors.LightBlue }]} />
+    <Image source={Images.FilterIcon} style={[styles.icon, { tintColor: Colors.secondary }]} />
 </View>
 );
 
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     height: 48,
   },
-  icon: { width: 22, height: 22, tintColor: Colors.LightBlue },
+  icon: { width: 22, height: 22, tintColor: Colors.secondary },
   input: { flex: 1, marginHorizontal: 8, fontSize: 16, color: Colors.Black, fontFamily: 'OpenSans-Regular' },
 });
 export default SearchBar;

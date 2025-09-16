@@ -39,7 +39,7 @@ const AppInput: React.FC<AppInputProps> = ({
     )}
     <TextInput
       style={[styles.input, disabled && styles.disabledInput, style]}
-      placeholderTextColor={disabled ? Colors.LightGray : Colors.Gray}
+      placeholderTextColor={disabled ? Colors.Gray : Colors.secondary}
       editable={!disabled}
       {...props}
     />
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: Colors.LightGray,
+    borderColor: Colors.secondary,
     borderRadius: 24,
     paddingHorizontal: 16,
     marginBottom: 16,
@@ -74,23 +74,23 @@ const styles = StyleSheet.create({
     height: 52,
   },
   disabledContainer: {
-    backgroundColor: Colors.LightGray,
+    backgroundColor: Colors.Gray,
     borderColor: Colors.LightGray,
   },
   icon: {
     width: 20,
     height: 20,
     marginRight: 10,
-    tintColor: Colors.LightBlue,
+    tintColor: Colors.secondary,
   },
   rightIcon: {
     width: 20,
     height: 20,
     marginLeft: 10,
-    tintColor: Colors.LightBlue,
+    tintColor: Colors.secondary,
   },
   disabledIcon: {
-    tintColor: Colors.LightGray,
+    tintColor: Colors.Gray,
   },
   input: {
     flex: 1,

@@ -32,13 +32,13 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     marginRight: 10,
     borderWidth: 1,
-    borderColor: Colors.LightGray,
+    borderColor: Colors.secondary,
   },
   chipActive: {
     backgroundColor: Colors.Black,
     borderColor: Colors.Black,
   },
-  chipText: { color: Colors.Black, fontWeight: '500' },
+  chipText: { color: Colors.primary, fontWeight: '500' },
   chipTextActive: { color: Colors.White },
 });
 export default TabChips;

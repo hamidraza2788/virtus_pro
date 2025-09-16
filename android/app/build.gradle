@@ -80,8 +80,8 @@ android {
     namespace "com.virtus_pro"
     defaultConfig {
         applicationId "com.virtus_pro"
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdk rootProject.ext.minSdkVersion
+        targetSdk rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
     }

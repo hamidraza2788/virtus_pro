@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   },
   desc: {
     fontSize: 10,
-    color: Colors.Gray,
+    color: Colors.secondary,
     marginBottom: 4,
   },
   row: {
@@ -97,13 +97,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   price: {
-    color: Colors.Purple,
+    color: Colors.primary,
     fontWeight: 'bold',
     fontSize: 18,
     marginRight: 8,
   },
   oldPrice: {
-    color: Colors.Gray,
+    color: Colors.secondary,
     fontSize: 12,
     textDecorationLine: 'line-through',
   },
@@ -129,10 +129,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 4,
     marginTop:4,
-    color: Colors.Purple,
+    color: Colors.primary,
   },
   plusBtn: {
-    backgroundColor: Colors.Purple,
+    backgroundColor: Colors.primary,
     borderRadius: 5,
     width: 18,
     height: 18,

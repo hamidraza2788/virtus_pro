@@ -18,7 +18,7 @@ const AppButton: React.FC<AppButtonProps> = ({ title, onPress, style, textStyle 
 const styles = StyleSheet.create({
   button: {
     width: '100%',
-    backgroundColor: Colors.Purple,
+    backgroundColor: Colors.primary,
     borderRadius: 8,
     paddingVertical: 14,
     paddingHorizontal: 16,

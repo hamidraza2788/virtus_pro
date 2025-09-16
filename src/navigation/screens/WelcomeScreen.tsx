@@ -10,7 +10,7 @@ import {
   Platform,
 } from 'react-native';
 import ImagePath from '../../assets/images/ImagePath';
-import { heightToDp, widthToDp } from '../../utils';
+import { Colors, heightToDp, widthToDp } from '../../utils';
 import CarouselSlider from '../../components/CarouselSlider';
 import AppButton from '../../components/AppButton';
 import { useNavigation } from '@react-navigation/native';
@@ -40,14 +40,6 @@ const WelcomeScreen = () => {
   const flatListRef = useRef<FlatList>(null);
   const navigation = useNavigation();
 
-  // Set status bar to transparent on mount
-  useEffect(() => {
-    if (Platform.OS === 'android') {
-      StatusBar.setTranslucent(true);
-      StatusBar.setBackgroundColor('transparent');
-    }
-    StatusBar.setBarStyle('light-content');
-  }, []);
 
   const handleNext = () => {
     if (currentIndex < slides.length - 1) {
@@ -98,7 +90,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   bottomCard: {
-    backgroundColor: '#fff',
+    backgroundColor: Colors.White,
     borderTopLeftRadius: 60,
     borderTopRightRadius: 60,
     paddingHorizontal: 28,

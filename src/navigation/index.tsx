@@ -12,6 +12,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 
 import React from "react";
+import SplashScreen from "./screens/SplashScreen";
 import WelcomeScreen from "./screens/WelcomeScreen";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
@@ -48,16 +49,16 @@ const BottomTabNavigator = () => {
               style={{
               width: 24,
               height: 24,
-              tintColor: focused ? Colors.Purple : Colors.White,
+              tintColor: focused ? Colors.secondary : Colors.White,
               resizeMode: "contain",
               }}
             />
             );
         },
-        tabBarActiveTintColor: Colors.Purple,
+        tabBarActiveTintColor: Colors.secondary,
         tabBarInactiveTintColor: Colors.White,
         tabBarStyle: {
-          backgroundColor: Colors.Black,
+          backgroundColor: Colors.primary,
           borderRadius: 20,
           height: 70,
           borderTopWidth: 0,
@@ -76,6 +77,7 @@ const BottomTabNavigator = () => {
         headerShown: false,
       })}
     >
+     
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Catalog" component={CatalogScreen} />
       <Tab.Screen name="Dealers" component={DealerScreen} />
@@ -85,7 +87,14 @@ const BottomTabNavigator = () => {
 };
 
 const RootStack = createNativeStackNavigator({
+  initialRouteName: 'SplashScreen',
   screens: {
+    SplashScreen: {
+      screen: SplashScreen,
+      options: {
+        headerShown: false,
+      },
+    },
     WelcomeScreen: {
       screen: WelcomeScreen,
       options: {
@@ -119,6 +128,7 @@ export const Navigation = createStaticNavigation(RootStack);
 
 // type RootStackParamList = StaticParamList<typeof RootStack>;
 type RootStackParamList = {
+  SplashScreen: undefined;
   WelcomeScreen: undefined; // No params expected
     HomeTabs: undefined;
   Login:undefined;

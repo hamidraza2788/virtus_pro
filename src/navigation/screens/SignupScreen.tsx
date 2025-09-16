@@ -31,6 +31,9 @@ const SignupScreen = () => {
           keyboardShouldPersistTaps="handled"
           showsVerticalScrollIndicator={false}
         >
+          <View style={styles.logoContainer}>
+            <Image source={Images.Logo} style={styles.logo} resizeMode="contain" />
+          </View>
           <Text style={styles.title}>Welcome to Virtus Pro</Text>
 <Text style={styles.subtitle}>Create your account to continue</Text>
 
@@ -139,6 +142,14 @@ const styles = StyleSheet.create({
     padding: 24,
     // justifyContent: 'center',
   },
+  logoContainer: {
+    alignItems: 'center',
+    marginBottom: 32,
+  },
+  logo: {
+    width: 120,
+    height: 120,
+  },
   title: {
     fontSize: 32,
     lineHeight:38,
@@ -149,7 +160,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 16,
-    color: Colors.Gray,
+    color: Colors.secondary,
     marginBottom: 24,
     fontFamily: 'OpenSans-Regular',
   },
@@ -157,17 +168,12 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     marginBottom: 18,
   },
-  forgotText: {
-    color: Colors.Purple,
-    fontSize: 14,
-    fontWeight: 'bold',
-    fontFamily: 'OpenSans-Regular',
-  },
+
   signInBtn: {
     borderRadius: 30,
     marginBottom: 24,
     marginTop: 4,
-    backgroundColor: Colors.Black
+    backgroundColor: Colors.primary
   },
   orRow: {
     flexDirection: 'row',
@@ -175,7 +181,7 @@ const styles = StyleSheet.create({
     marginBottom: 18,
   },
   orText: {
-    color: Colors.Gray,
+    color: Colors.secondary,
     fontSize: 14,
     marginHorizontal: 8,
     fontFamily: 'OpenSans-Regular',
@@ -183,14 +189,14 @@ const styles = StyleSheet.create({
   line: {
     flex: 1,
     height: 1,
-    backgroundColor: Colors.LightGray,
+    backgroundColor: Colors.secondary,
   },
   socialBtn: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center', // Center content horizontally
     borderWidth: 1,
-    borderColor: Colors.LightGray,
+    borderColor: Colors.secondary,
     borderRadius: 24,
     paddingVertical: 12,
     paddingHorizontal: 18,
@@ -205,7 +211,7 @@ const styles = StyleSheet.create({
   },
   socialText: {
     fontSize: 16,
-    color: '#222',
+    color: Colors.secondary,
     fontFamily: 'OpenSans-SemiBold',
   },
   signupRow: {
@@ -215,17 +221,17 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   signupText: {
-    color: Colors.Black,
+    color: Colors.secondary,
     fontSize: 14,
     fontFamily: 'OpenSans-Regular',
   },
   signupLink: {
-    color: '#7C3AED',
+    color: Colors.primary,
     fontSize: 14,
     fontFamily: 'OpenSans-Bold',
   },
   termsText: {
-    color: Colors.Gray,
+    color: Colors.secondary,
     fontSize: 12,
     textAlign: 'center',
     marginTop: 30,
@@ -234,7 +240,7 @@ const styles = StyleSheet.create({
    
   },
   link: {
-    color: Colors.Purple,
+    color: Colors.primary,
     textDecorationLine: 'underline',
     fontFamily: 'OpenSans-Bold',
     

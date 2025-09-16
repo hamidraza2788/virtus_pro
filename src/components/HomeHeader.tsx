@@ -22,8 +22,8 @@ const HomeHeader = () => (
 const styles = StyleSheet.create({
   header: { flexDirection: 'row', alignItems: 'center', marginHorizontal: 20, marginBottom: 12 },
   avatar: { width: 44, height: 44, borderRadius: 22 },
-  deliverTo: { color: Colors.Purple, fontWeight: '600', fontSize: 13 },
-  location: { color: Colors.Black, fontWeight: 'bold', fontSize: 15 },
+  deliverTo: { color: Colors.primary, fontWeight: '600', fontSize: 13 },
+  location: { color: Colors.secondary, fontWeight: 'bold', fontSize: 15 },
   locationArrow: { fontSize: 12 },
   bellWrapper: { position: 'relative' },
   bell: { width: 24, height: 24, marginLeft: 8 },
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: 'red',
     borderWidth: 1,
-    borderColor: '#fff',
+    borderColor: Colors.White,
   },
 });
 export default HomeHeader;

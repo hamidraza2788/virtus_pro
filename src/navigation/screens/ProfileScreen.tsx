@@ -98,9 +98,7 @@ const ProfileScreen = () => {
                         <Text style={styles.logoutText}>Logout</Text>
                     </TouchableOpacity>
 
-            {/* <TouchableOpacity onPress={() => { navigation.navigate('Login') }} style={styles.signupRow}>
-              <Text style={styles.signupLink}>Logout</Text>
-            </TouchableOpacity> */}
+        
          
 
         
@@ -128,38 +126,34 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 16,
-    color: Colors.Gray,
+    color: Colors.secondary,
     marginBottom: 24,
     fontFamily: 'OpenSans-Regular',
   }, 
   signInBtn: {
     borderRadius: 30,
-    marginBottom: 24,
+    marginBottom: 0,
     marginTop: 4,
-    backgroundColor: Colors.Black
+    backgroundColor: Colors.primary
   },
   signupRow: {
     flexDirection: 'row',
     justifyContent: 'center',
     marginTop: 8,
-    marginBottom: 10,
+    marginBottom: 0,
   },
-  signupLink: {
-    color: '#7C3AED',
-    fontSize: 18,
-    fontFamily: 'OpenSans-Bold',
-  },
+ 
  separator: {
         height: 1,
-        backgroundColor: Colors.LightGray,
-        marginVertical: 24,
+        backgroundColor: Colors.secondary,
+        marginVertical: 50,
     },
     logoutButton: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
         borderWidth: 1,
-        borderColor: 'red',
+        borderColor: Colors.secondary,
         borderRadius: 30,
         paddingVertical: 16,
         paddingHorizontal: 24,
@@ -169,10 +163,10 @@ const styles = StyleSheet.create({
         width: 20,
         height: 20,
         marginRight: 12,
-        tintColor: 'red',
+        tintColor: Colors.secondary,
     },
     logoutText: {
-        color: 'red',
+        color: Colors.secondary,
         fontSize: 16,
         fontFamily: 'OpenSans-SemiBold',
     },

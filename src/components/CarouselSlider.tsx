@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     },
     subtitle: {
         fontSize: 15,
-        color: Colors.Gray,
+        color: Colors.secondary,
         textAlign: 'center',
         marginBottom: 28,
         lineHeight: 22,
@@ -101,11 +101,11 @@ const styles = StyleSheet.create({
         width: 8,
         height: 8,
         borderRadius: 4,
-        backgroundColor: Colors.LightGray,
+        backgroundColor: Colors.Gray,
         marginHorizontal: 4,
     },
     dotActive: {
-        backgroundColor: Colors.Purple,
+        backgroundColor: Colors.primary,
         width: 18,
     },
 });
