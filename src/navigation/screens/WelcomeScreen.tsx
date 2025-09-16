@@ -9,6 +9,7 @@ import {
   StatusBar,
   Platform,
 } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import ImagePath from '../../assets/images/ImagePath';
 import { Colors, heightToDp, widthToDp } from '../../utils';
 import CarouselSlider from '../../components/CarouselSlider';
@@ -17,28 +18,29 @@ import { useNavigation } from '@react-navigation/native';
 
 const { width } = Dimensions.get('window');
 
-const slides = [
-  {
-    key: '1',
-    title: 'Welcome to our\ncompany',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-  },
-  {
-    key: '2',
-    title: 'Discover Products',
-    description: 'Browse our catalog and find the best products for your needs.',
-  },
-  {
-    key: '3',
-    title: 'Join the Community',
-    description: 'Connect with dealers and other users to get the most out of our platform.',
-  },
-];
-
 const WelcomeScreen = () => {
+  const { t } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(0);
   const flatListRef = useRef<FlatList>(null);
   const navigation = useNavigation();
+
+  const slides = [
+    {
+      key: '1',
+      title: t('home.welcomeToCompany'),
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    },
+    {
+      key: '2',
+      title: t('home.discoverProducts'),
+      description: t('home.discoverProductsDesc'),
+    },
+    {
+      key: '3',
+      title: t('home.joinCommunity'),
+      description: t('home.joinCommunityDesc'),
+    },
+  ];
 
 
   const handleNext = () => {
@@ -64,7 +66,7 @@ const WelcomeScreen = () => {
             flatListRef={flatListRef}
           />
           <AppButton
-            title={currentIndex === slides.length - 1 ? 'Get Started' : 'Next'}
+            title={currentIndex === slides.length - 1 ? t('home.getStarted') : t('common.next')}
             onPress={handleNext}
           />
         </View>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import AppInput from '../../components/AppInput';
 import AppButton from '../../components/AppButton';
 import Images from '../../assets/images/ImagePath';
@@ -8,6 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const SignupScreen = () => {
+  const { t } = useTranslation();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -34,11 +36,11 @@ const SignupScreen = () => {
           <View style={styles.logoContainer}>
             <Image source={Images.Logo} style={styles.logo} resizeMode="contain" />
           </View>
-          <Text style={styles.title}>Welcome to Virtus Pro</Text>
-<Text style={styles.subtitle}>Create your account to continue</Text>
+          <Text style={styles.title}>{t('home.welcome')}</Text>
+          <Text style={styles.subtitle}>Create your account to continue</Text>
 
-<AppInput
-            placeholder="First Name"
+          <AppInput
+            placeholder={t('auth.firstName')}
             icon={Images.userIcon}
             value={firstName}
             onChangeText={setFirstName}
@@ -46,7 +48,7 @@ const SignupScreen = () => {
             autoCapitalize="words"
           />
           <AppInput
-            placeholder="Last Name"
+            placeholder={t('auth.lastName')}
             icon={Images.userIcon}
             value={lastName}
             onChangeText={setLastName}
@@ -54,7 +56,7 @@ const SignupScreen = () => {
             autoCapitalize="words"
           />
           <AppInput
-            placeholder="Type your email"
+            placeholder={t('auth.email')}
             icon={Images.EmailIcon}
             value={email}
             onChangeText={setEmail}
@@ -62,15 +64,14 @@ const SignupScreen = () => {
             autoCapitalize="none"
           />
           <AppInput
-            placeholder="Phone Number"
+            placeholder={t('auth.phone')}
             icon={Images.phoneIcon}
             value={phone}
             onChangeText={setPhone}
             keyboardType="phone-pad"
-            // autoCapitalize="words"
           />
           <AppInput
-            placeholder="Address"
+            placeholder={t('auth.address')}
             icon={Images.locationIcon}
             value={address}
             onChangeText={setAddress}
@@ -78,7 +79,7 @@ const SignupScreen = () => {
             autoCapitalize="words"
           />
           <AppInput
-            placeholder="Type your password"
+            placeholder={t('auth.password')}
             icon={Images.LockIcon}
             rightIcon={showPassword ? Images.EyeIcon : Images.EyeOffIcon}
             value={password}
@@ -87,8 +88,8 @@ const SignupScreen = () => {
             autoCapitalize="none"
             onRightIconPress={() => setShowPassword(!showPassword)}
           />
- <AppInput
-            placeholder="Confirm Password"
+          <AppInput
+            placeholder={t('auth.confirmPassword')}
             icon={Images.LockIcon}
             rightIcon={showConfirmPassword ? Images.EyeIcon : Images.EyeOffIcon}
             value={confirmPassword}
@@ -97,35 +98,34 @@ const SignupScreen = () => {
             autoCapitalize="none"
             onRightIconPress={() => setShowConfirmPassword(!showConfirmPassword)}
           />
-         
 
-          <AppButton title="Sign Up" onPress={() => { navigation.navigate('Login') }} style={styles.signInBtn} />
+          <AppButton title={t('auth.signup')} onPress={() => { navigation.navigate('Login') }} style={styles.signInBtn} />
 
           <View style={styles.orRow}>
             <View style={styles.line} />
-            <Text style={styles.orText}>Or sign in with</Text>
+            <Text style={styles.orText}>{t('auth.signInWith')}</Text>
             <View style={styles.line} />
           </View>
 
           <TouchableOpacity style={styles.socialBtn}>
             <Image source={Images.AppleIcon} style={styles.socialIcon} />
-            <Text style={styles.socialText}>Sign In with Apple</Text>
+            <Text style={styles.socialText}>{t('auth.signInWithApple')}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.socialBtn}>
             <Image source={Images.GoogleIcon} style={styles.socialIcon} />
-            <Text style={styles.socialText}>Sign In with Google</Text>
+            <Text style={styles.socialText}>{t('auth.signInWithGoogle')}</Text>
           </TouchableOpacity>
 
           <View style={styles.signupRow}>
-            <Text style={styles.signupText}>Already have an account? </Text>
+            <Text style={styles.signupText}>{t('auth.alreadyHaveAccount')} </Text>
             <TouchableOpacity onPress={() => { navigation.navigate('Login') }}>
-              <Text style={styles.signupLink}>Sign In</Text>
+              <Text style={styles.signupLink}>{t('auth.login')}</Text>
             </TouchableOpacity>
           </View>
 
           <Text style={styles.termsText}>
-            By using our services you are agreeing to our{' '}
-            <Text style={styles.link}>Terms</Text> and <Text style={styles.link}>Privacy Policy</Text>
+            {t('auth.termsAndPrivacy')}{' '}
+            <Text style={styles.link}>{t('auth.terms')}</Text> and <Text style={styles.link}>{t('auth.privacyPolicy')}</Text>
           </Text>
         </ScrollView>
       </KeyboardAvoidingView>

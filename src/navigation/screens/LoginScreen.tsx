@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import AppInput from '../../components/AppInput';
 import AppButton from '../../components/AppButton';
 import Images from '../../assets/images/ImagePath';
@@ -8,6 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const LoginScreen = () => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -28,11 +30,11 @@ const LoginScreen = () => {
           <View style={styles.logoContainer}>
             <Image source={Images.Logo} style={styles.logo} resizeMode="contain" />
           </View>
-          <Text style={styles.title}>Hi! Login to Virtus Pro</Text>
-          <Text style={styles.subtitle}>Sign In to your account</Text>
+          <Text style={styles.title}>Hi! {t('auth.login')} to Virtus Pro</Text>
+          <Text style={styles.subtitle}>{t('auth.login')} to your account</Text>
 
           <AppInput
-            placeholder="Type your email"
+            placeholder={t('auth.email')}
             icon={Images.EmailIcon}
             value={email}
             onChangeText={setEmail}
@@ -40,7 +42,7 @@ const LoginScreen = () => {
             autoCapitalize="none"
           />
           <AppInput
-            placeholder="Type your password"
+            placeholder={t('auth.password')}
             icon={Images.LockIcon}
             rightIcon={showPassword ? Images.EyeIcon : Images.EyeOffIcon}
             value={password}
@@ -51,36 +53,36 @@ const LoginScreen = () => {
           />
 
           <TouchableOpacity style={styles.forgotBtn}>
-            <Text style={styles.forgotText}>Forgot Password?</Text>
+            <Text style={styles.forgotText}>{t('auth.forgotPassword')}</Text>
           </TouchableOpacity>
 
-          <AppButton title="Sign In" onPress={() => { navigation.navigate('HomeTabs') }} style={styles.signInBtn} />
+          <AppButton title={t('auth.login')} onPress={() => { navigation.navigate('HomeTabs') }} style={styles.signInBtn} />
 
           <View style={styles.orRow}>
             <View style={styles.line} />
-            <Text style={styles.orText}>Or sign in with</Text>
+            <Text style={styles.orText}>{t('auth.signInWith')}</Text>
             <View style={styles.line} />
           </View>
 
           <TouchableOpacity style={styles.socialBtn}>
             <Image source={Images.AppleIcon} style={styles.socialIcon} />
-            <Text style={styles.socialText}>Sign In with Apple</Text>
+            <Text style={styles.socialText}>{t('auth.signInWithApple')}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.socialBtn}>
             <Image source={Images.GoogleIcon} style={styles.socialIcon} />
-            <Text style={styles.socialText}>Sign In with Google</Text>
+            <Text style={styles.socialText}>{t('auth.signInWithGoogle')}</Text>
           </TouchableOpacity>
 
           <View style={styles.signupRow}>
-            <Text style={styles.signupText}>Don't have an account? </Text>
+            <Text style={styles.signupText}>{t('auth.dontHaveAccount')} </Text>
             <TouchableOpacity onPress={() => { navigation.navigate('Signup') }}>
-              <Text style={styles.signupLink}>Sign Up</Text>
+              <Text style={styles.signupLink}>{t('auth.signup')}</Text>
             </TouchableOpacity>
           </View>
 
           <Text style={styles.termsText}>
-            By using our services you are agreeing to our{' '}
-            <Text style={styles.link}>Terms</Text> and <Text style={styles.link}>Privacy Policy</Text>
+            {t('auth.termsAndPrivacy')}{' '}
+            <Text style={styles.link}>{t('auth.terms')}</Text> and <Text style={styles.link}>{t('auth.privacyPolicy')}</Text>
           </Text>
         </ScrollView>
       </KeyboardAvoidingView>

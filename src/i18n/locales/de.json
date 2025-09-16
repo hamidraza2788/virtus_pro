@@ -1,0 +1,109 @@
+{
+  "common": {
+    "loading": "Laden...",
+    "error": "Fehler",
+    "success": "Erfolg",
+    "cancel": "Abbrechen",
+    "confirm": "Bestätigen",
+    "save": "Speichern",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "back": "Zurück",
+    "next": "Weiter",
+    "previous": "Vorherige",
+    "done": "Fertig",
+    "close": "Schließen",
+    "search": "Suchen",
+    "filter": "Filtern",
+    "sort": "Sortieren",
+    "refresh": "Aktualisieren",
+    "seeAll": "Alle anzeigen"
+  },
+  "auth": {
+    "login": "Anmelden",
+    "signup": "Registrieren",
+    "logout": "Abmelden",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "confirmPassword": "Passwort bestätigen",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "phone": "Telefon",
+    "address": "Adresse",
+    "forgotPassword": "Passwort vergessen?",
+    "dontHaveAccount": "Haben Sie kein Konto?",
+    "alreadyHaveAccount": "Haben Sie bereits ein Konto?",
+    "signInWith": "Oder anmelden mit",
+    "signInWithApple": "Mit Apple anmelden",
+    "signInWithGoogle": "Mit Google anmelden",
+    "termsAndPrivacy": "Durch die Nutzung unserer Dienste stimmen Sie unseren Geschäftsbedingungen und der Datenschutzrichtlinie zu",
+    "terms": "Geschäftsbedingungen",
+    "privacyPolicy": "Datenschutzrichtlinie"
+  },
+  "navigation": {
+    "home": "Startseite",
+    "catalog": "Katalog",
+    "dealers": "Händler",
+    "profile": "Profil"
+  },
+  "home": {
+    "welcome": "Willkommen bei Virtus Pro",
+    "discoverProducts": "Produkte entdecken",
+    "joinCommunity": "Gemeinschaft beitreten",
+    "welcomeToCompany": "Willkommen in unserem Unternehmen",
+    "discoverProductsDesc": "Durchsuchen Sie unseren Katalog und finden Sie die besten Produkte für Ihre Bedürfnisse.",
+    "joinCommunityDesc": "Verbinden Sie sich mit Händlern und anderen Benutzern, um das Beste aus unserer Plattform herauszuholen.",
+    "getStarted": "Loslegen",
+    "deliverTo": "Liefern nach"
+  },
+  "catalog": {
+    "categories": "Kategorien",
+    "products": "Produkte",
+    "featured": "Empfohlen",
+    "newArrivals": "Neuheiten",
+    "bestSellers": "Bestseller",
+    "price": "Preis",
+    "rating": "Bewertung",
+    "inStock": "Auf Lager",
+    "outOfStock": "Nicht verfügbar",
+    "addToCart": "In den Warenkorb",
+    "viewDetails": "Details anzeigen"
+  },
+  "profile": {
+    "myProfile": "Mein Profil",
+    "personalInfo": "Persönliche Informationen",
+    "accountSettings": "Kontoeinstellungen",
+    "notifications": "Benachrichtigungen",
+    "help": "Hilfe & Support",
+    "about": "Über",
+    "version": "Version",
+    "editProfile": "Profil bearbeiten",
+    "changePassword": "Passwort ändern",
+    "deleteAccount": "Konto löschen"
+  },
+  "language": {
+    "selectLanguage": "Sprache auswählen",
+    "currentLanguage": "Aktuelle Sprache",
+    "changeLanguage": "Sprache ändern"
+  },
+  "errors": {
+    "networkError": "Netzwerkfehler",
+    "serverError": "Serverfehler",
+    "invalidCredentials": "Ungültige Anmeldedaten",
+    "emailRequired": "E-Mail ist erforderlich",
+    "passwordRequired": "Passwort ist erforderlich",
+    "passwordMismatch": "Passwörter stimmen nicht überein",
+    "invalidEmail": "Bitte geben Sie eine gültige E-Mail ein",
+    "somethingWentWrong": "Etwas ist schief gelaufen. Bitte versuchen Sie es erneut."
+  },
+  "messages": {
+    "loginSuccess": "Anmeldung erfolgreich!",
+    "loginFailed": "Anmeldung fehlgeschlagen. Bitte überprüfen Sie Ihre Anmeldedaten.",
+    "signupSuccess": "Registrierung erfolgreich!",
+    "signupFailed": "Registrierung fehlgeschlagen. Bitte versuchen Sie es erneut.",
+    "logoutSuccess": "Abmeldung erfolgreich!",
+    "profileUpdated": "Profil erfolgreich aktualisiert!",
+    "passwordChanged": "Passwort erfolgreich geändert!",
+    "languageChanged": "Sprache erfolgreich geändert!"
+  }
+}

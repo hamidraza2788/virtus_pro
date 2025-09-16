@@ -1,19 +1,24 @@
 import React from 'react';
 import { View, TextInput, StyleSheet, Image } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import Images from '../assets/images/ImagePath';
 import { Colors } from '../utils';
 
-const SearchBar = () => (
-<View style={styles.container}>
-    <Image source={Images.SearchIcon} style={[styles.icon, { tintColor: Colors.secondary }]} />
-    <TextInput
+const SearchBar = () => {
+  const { t } = useTranslation();
+  
+  return (
+    <View style={styles.container}>
+      <Image source={Images.SearchIcon} style={[styles.icon, { tintColor: Colors.secondary }]} />
+      <TextInput
         style={styles.input}
-        placeholder="Search"
+        placeholder={t('common.search')}
         placeholderTextColor={Colors.secondary}
-    />
-    <Image source={Images.FilterIcon} style={[styles.icon, { tintColor: Colors.secondary }]} />
-</View>
-);
+      />
+      <Image source={Images.FilterIcon} style={[styles.icon, { tintColor: Colors.secondary }]} />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

@@ -1,0 +1,109 @@
+{
+  "common": {
+    "loading": "Caricamento...",
+    "error": "Errore",
+    "success": "Successo",
+    "cancel": "Annulla",
+    "confirm": "Conferma",
+    "save": "Salva",
+    "delete": "Elimina",
+    "edit": "Modifica",
+    "back": "Indietro",
+    "next": "Avanti",
+    "previous": "Precedente",
+    "done": "Fatto",
+    "close": "Chiudi",
+    "search": "Cerca",
+    "filter": "Filtra",
+    "sort": "Ordina",
+    "refresh": "Aggiorna",
+    "seeAll": "Vedi Tutto"
+  },
+  "auth": {
+    "login": "Accedi",
+    "signup": "Registrati",
+    "logout": "Esci",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Conferma Password",
+    "firstName": "Nome",
+    "lastName": "Cognome",
+    "phone": "Telefono",
+    "address": "Indirizzo",
+    "forgotPassword": "Password dimenticata?",
+    "dontHaveAccount": "Non hai un account?",
+    "alreadyHaveAccount": "Hai già un account?",
+    "signInWith": "Oppure accedi con",
+    "signInWithApple": "Accedi con Apple",
+    "signInWithGoogle": "Accedi con Google",
+    "termsAndPrivacy": "Utilizzando i nostri servizi accetti i nostri Termini e la Privacy Policy",
+    "terms": "Termini",
+    "privacyPolicy": "Privacy Policy"
+  },
+  "navigation": {
+    "home": "Home",
+    "catalog": "Catalogo",
+    "dealers": "Rivenditori",
+    "profile": "Profilo"
+  },
+  "home": {
+    "welcome": "Benvenuto in Virtus Pro",
+    "discoverProducts": "Scopri i Prodotti",
+    "joinCommunity": "Unisciti alla Comunità",
+    "welcomeToCompany": "Benvenuto nella nostra azienda",
+    "discoverProductsDesc": "Sfoglia il nostro catalogo e trova i migliori prodotti per le tue esigenze.",
+    "joinCommunityDesc": "Connettiti con rivenditori e altri utenti per ottenere il massimo dalla nostra piattaforma.",
+    "getStarted": "Inizia",
+    "deliverTo": "Consegna a"
+  },
+  "catalog": {
+    "categories": "Categorie",
+    "products": "Prodotti",
+    "featured": "In Evidenza",
+    "newArrivals": "Nuovi Arrivi",
+    "bestSellers": "Best Seller",
+    "price": "Prezzo",
+    "rating": "Valutazione",
+    "inStock": "Disponibile",
+    "outOfStock": "Esaurito",
+    "addToCart": "Aggiungi al Carrello",
+    "viewDetails": "Visualizza Dettagli"
+  },
+  "profile": {
+    "myProfile": "Il Mio Profilo",
+    "personalInfo": "Informazioni Personali",
+    "accountSettings": "Impostazioni Account",
+    "notifications": "Notifiche",
+    "help": "Aiuto e Supporto",
+    "about": "Informazioni",
+    "version": "Versione",
+    "editProfile": "Modifica Profilo",
+    "changePassword": "Cambia Password",
+    "deleteAccount": "Elimina Account"
+  },
+  "language": {
+    "selectLanguage": "Seleziona Lingua",
+    "currentLanguage": "Lingua Attuale",
+    "changeLanguage": "Cambia Lingua"
+  },
+  "errors": {
+    "networkError": "Errore di Rete",
+    "serverError": "Errore del Server",
+    "invalidCredentials": "Credenziali non valide",
+    "emailRequired": "Email richiesta",
+    "passwordRequired": "Password richiesta",
+    "passwordMismatch": "Le password non corrispondono",
+    "invalidEmail": "Inserisci un'email valida",
+    "somethingWentWrong": "Qualcosa è andato storto. Riprova."
+  },
+  "messages": {
+    "loginSuccess": "Accesso riuscito!",
+    "loginFailed": "Accesso fallito. Controlla le tue credenziali.",
+    "signupSuccess": "Registrazione riuscita!",
+    "signupFailed": "Registrazione fallita. Riprova.",
+    "logoutSuccess": "Logout riuscito!",
+    "profileUpdated": "Profilo aggiornato con successo!",
+    "passwordChanged": "Password cambiata con successo!",
+    "languageChanged": "Lingua cambiata con successo!"
+  }
+}

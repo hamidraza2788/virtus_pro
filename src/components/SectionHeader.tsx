@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { Colors } from '../utils';
 
 interface Props {
@@ -8,16 +9,20 @@ interface Props {
   onSeeAllPress?: () => void;
 }
 
-const SectionHeader: React.FC<Props> = ({ title, showSeeAll, onSeeAllPress }) => (
-  <View style={styles.row}>
-    <Text style={styles.title}>{title} <Text style={styles.emoji}>😍</Text></Text>
-    {showSeeAll && (
-      <TouchableOpacity onPress={onSeeAllPress}>
-        <Text style={styles.seeAll}>See All</Text>
-      </TouchableOpacity>
-    )}
-  </View>
-);
+const SectionHeader: React.FC<Props> = ({ title, showSeeAll, onSeeAllPress }) => {
+  const { t } = useTranslation();
+  
+  return (
+    <View style={styles.row}>
+      <Text style={styles.title}>{title} <Text style={styles.emoji}>😍</Text></Text>
+      {showSeeAll && (
+        <TouchableOpacity onPress={onSeeAllPress}>
+          <Text style={styles.seeAll}>{t('common.seeAll')}</Text>
+        </TouchableOpacity>
+      )}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   row: {

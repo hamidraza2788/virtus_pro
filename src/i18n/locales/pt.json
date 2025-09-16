@@ -1,0 +1,109 @@
+{
+  "common": {
+    "loading": "Carregando...",
+    "error": "Erro",
+    "success": "Sucesso",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "save": "Salvar",
+    "delete": "Excluir",
+    "edit": "Editar",
+    "back": "Voltar",
+    "next": "Próximo",
+    "previous": "Anterior",
+    "done": "Concluído",
+    "close": "Fechar",
+    "search": "Pesquisar",
+    "filter": "Filtrar",
+    "sort": "Ordenar",
+    "refresh": "Atualizar",
+    "seeAll": "Ver Tudo"
+  },
+  "auth": {
+    "login": "Entrar",
+    "signup": "Cadastrar",
+    "logout": "Sair",
+    "email": "E-mail",
+    "password": "Senha",
+    "confirmPassword": "Confirmar Senha",
+    "firstName": "Nome",
+    "lastName": "Sobrenome",
+    "phone": "Telefone",
+    "address": "Endereço",
+    "forgotPassword": "Esqueceu a senha?",
+    "dontHaveAccount": "Não tem uma conta?",
+    "alreadyHaveAccount": "Já tem uma conta?",
+    "signInWith": "Ou entre com",
+    "signInWithApple": "Entrar com Apple",
+    "signInWithGoogle": "Entrar com Google",
+    "termsAndPrivacy": "Ao usar nossos serviços, você concorda com nossos Termos e Política de Privacidade",
+    "terms": "Termos",
+    "privacyPolicy": "Política de Privacidade"
+  },
+  "navigation": {
+    "home": "Início",
+    "catalog": "Catálogo",
+    "dealers": "Revendedores",
+    "profile": "Perfil"
+  },
+  "home": {
+    "welcome": "Bem-vindo ao Virtus Pro",
+    "discoverProducts": "Descobrir Produtos",
+    "joinCommunity": "Juntar-se à Comunidade",
+    "welcomeToCompany": "Bem-vindo à nossa empresa",
+    "discoverProductsDesc": "Navegue pelo nosso catálogo e encontre os melhores produtos para suas necessidades.",
+    "joinCommunityDesc": "Conecte-se com revendedores e outros usuários para aproveitar ao máximo nossa plataforma.",
+    "getStarted": "Começar",
+    "deliverTo": "Entregar para"
+  },
+  "catalog": {
+    "categories": "Categorias",
+    "products": "Produtos",
+    "featured": "Destaques",
+    "newArrivals": "Novidades",
+    "bestSellers": "Mais Vendidos",
+    "price": "Preço",
+    "rating": "Avaliação",
+    "inStock": "Em Estoque",
+    "outOfStock": "Fora de Estoque",
+    "addToCart": "Adicionar ao Carrinho",
+    "viewDetails": "Ver Detalhes"
+  },
+  "profile": {
+    "myProfile": "Meu Perfil",
+    "personalInfo": "Informações Pessoais",
+    "accountSettings": "Configurações da Conta",
+    "notifications": "Notificações",
+    "help": "Ajuda e Suporte",
+    "about": "Sobre",
+    "version": "Versão",
+    "editProfile": "Editar Perfil",
+    "changePassword": "Alterar Senha",
+    "deleteAccount": "Excluir Conta"
+  },
+  "language": {
+    "selectLanguage": "Selecionar Idioma",
+    "currentLanguage": "Idioma Atual",
+    "changeLanguage": "Alterar Idioma"
+  },
+  "errors": {
+    "networkError": "Erro de Rede",
+    "serverError": "Erro do Servidor",
+    "invalidCredentials": "Credenciais inválidas",
+    "emailRequired": "E-mail é obrigatório",
+    "passwordRequired": "Senha é obrigatória",
+    "passwordMismatch": "As senhas não coincidem",
+    "invalidEmail": "Por favor, insira um e-mail válido",
+    "somethingWentWrong": "Algo deu errado. Tente novamente."
+  },
+  "messages": {
+    "loginSuccess": "Login realizado com sucesso!",
+    "loginFailed": "Falha no login. Verifique suas credenciais.",
+    "signupSuccess": "Cadastro realizado com sucesso!",
+    "signupFailed": "Falha no cadastro. Tente novamente.",
+    "logoutSuccess": "Logout realizado com sucesso!",
+    "profileUpdated": "Perfil atualizado com sucesso!",
+    "passwordChanged": "Senha alterada com sucesso!",
+    "languageChanged": "Idioma alterado com sucesso!"
+  }
+}

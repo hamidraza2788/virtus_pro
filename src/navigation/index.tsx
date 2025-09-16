@@ -6,6 +6,7 @@ import {
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Image, Platform, View } from "react-native";
+import { useTranslation } from 'react-i18next';
 import ImagePath from "../assets/images/ImagePath";
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -28,6 +29,7 @@ import { Colors } from "../utils";
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
+  const { t } = useTranslation();
   const insets = useSafeAreaInsets();
   return (
     <Tab.Navigator
@@ -78,10 +80,26 @@ const BottomTabNavigator = () => {
       })}
     >
      
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Catalog" component={CatalogScreen} />
-      <Tab.Screen name="Dealers" component={DealerScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen 
+        name="Home" 
+        component={HomeScreen} 
+        options={{ title: t('navigation.home') }}
+      />
+      <Tab.Screen 
+        name="Catalog" 
+        component={CatalogScreen} 
+        options={{ title: t('navigation.catalog') }}
+      />
+      <Tab.Screen 
+        name="Dealers" 
+        component={DealerScreen} 
+        options={{ title: t('navigation.dealers') }}
+      />
+      <Tab.Screen 
+        name="Profile" 
+        component={ProfileScreen} 
+        options={{ title: t('navigation.profile') }}
+      />
     </Tab.Navigator>
   );
 };

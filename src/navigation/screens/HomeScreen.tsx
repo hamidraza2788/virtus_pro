@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import HomeHeader from '../../components/HomeHeader';
 import SearchBar from '../../components/SearchBar';
 import CategoryChips from '../../components/CategoryChips';
@@ -12,6 +13,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 const HomeScreen = () => {
+  const { t } = useTranslation();
+  
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -19,7 +22,7 @@ const HomeScreen = () => {
         <SearchBar />
         <CategoryChips />
         <FeaturedProductsCarousel />
-        <SectionHeader title="Recommended For You" showSeeAll />
+        <SectionHeader title={t('catalog.featured')} showSeeAll />
         <TabChips />
         <ProductList /> 
       </ScrollView>

@@ -12,6 +12,8 @@ import { Navigation } from './src/navigation';
 
 import { enableScreens } from 'react-native-screens';
 import { store } from './src/redux/store';
+import LanguageSync from './src/components/LanguageSync';
+import './src/i18n'; // Initialize i18n
 
 enableScreens();
 
@@ -19,6 +21,7 @@ function App() {
   return (
     <Provider store={store}>
       <SafeAreaProvider>
+        <LanguageSync />
         <StatusBar 
           barStyle="dark-content"
           backgroundColor="transparent"

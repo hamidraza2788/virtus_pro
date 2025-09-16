@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import AppInput from '../../components/AppInput';
 import AppButton from '../../components/AppButton';
 import Images from '../../assets/images/ImagePath';
@@ -7,12 +8,13 @@ import { Colors } from '../../utils';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 const ProfileScreen = () => {
+    const { t } = useTranslation();
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
-      const navigation = useNavigation();
+    const navigation = useNavigation();
     
   return (
     <SafeAreaView style={styles.container}>
@@ -26,11 +28,11 @@ const ProfileScreen = () => {
           keyboardShouldPersistTaps="handled"
           showsVerticalScrollIndicator={false}
         >
-          <Text style={styles.title}>Update Your Profile</Text>
-<Text style={styles.subtitle}>Keep your information up to date</Text>
+          <Text style={styles.title}>{t('profile.editProfile')}</Text>
+          <Text style={styles.subtitle}>Keep your information up to date</Text>
 
-<AppInput
-            placeholder="First Name"
+          <AppInput
+            placeholder={t('auth.firstName')}
             icon={Images.userIcon}
             value={firstName}
             onChangeText={setFirstName}
@@ -38,7 +40,7 @@ const ProfileScreen = () => {
             autoCapitalize="words"
           />
           <AppInput
-            placeholder="Last Name"
+            placeholder={t('auth.lastName')}
             icon={Images.userIcon}
             value={lastName}
             onChangeText={setLastName}
@@ -46,57 +48,49 @@ const ProfileScreen = () => {
             autoCapitalize="words"
           />
           <AppInput
-            placeholder="Type your email"
+            placeholder={t('auth.email')}
             icon={Images.EmailIcon}
             value={email}
             onChangeText={setEmail}
             keyboardType="email-address"
             autoCapitalize="none"
-              disabled={true}
-          
+            disabled={true}
           />
           <AppInput
-            placeholder="Phone Number"
+            placeholder={t('auth.phone')}
             icon={Images.phoneIcon}
             value={phone}
             onChangeText={setPhone}
             keyboardType="phone-pad"
-            // autoCapitalize="words"
           />
           <AppInput
-            placeholder="Address"
+            placeholder={t('auth.address')}
             icon={Images.locationIcon}
             value={address}
             onChangeText={setAddress}
             keyboardType="default"
             autoCapitalize="words"
           />
-         
- 
-         
 
-          <AppButton title="Update" onPress={() => { navigation.navigate('Login') }} style={styles.signInBtn} />
+          <AppButton title={t('common.save')} onPress={() => { navigation.navigate('Login') }} style={styles.signInBtn} />
 
-         
-
-         
-   {/* Separator Line */}
-                    <View style={styles.separator} />
-                    
-                    {/* Logout Button */}
-                    <TouchableOpacity 
-                        onPress={() => { 
-                            // Add logout logic here
-                            navigation.navigate('Login'); 
-                        }} 
-                        style={styles.logoutButton}
-                    >
-                        <Image 
-                            source={Images.LogoutIcon} 
-                            style={styles.logoutIcon} 
-                        />
-                        <Text style={styles.logoutText}>Logout</Text>
-                    </TouchableOpacity>
+          {/* Separator Line */}
+          <View style={styles.separator} />
+          
+          {/* Logout Button */}
+          <TouchableOpacity 
+            onPress={() => { 
+              // Add logout logic here
+              navigation.navigate('Login'); 
+            }} 
+            style={styles.logoutButton}
+          >
+            <Image 
+              source={Images.LogoutIcon} 
+              style={styles.logoutIcon} 
+            />
+            <Text style={styles.logoutText}>{t('auth.logout')}</Text>
+          </TouchableOpacity>
 
         
          
