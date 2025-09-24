@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, KeyboardAvoidingView, Platform, ScrollView, Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import AppInput from '../../components/AppInput';
 import AppButton from '../../components/AppButton';
@@ -7,6 +7,10 @@ import Images from '../../assets/images/ImagePath';
 import { Colors } from '../../utils';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { loginUser } from '../../redux/slices/authSlice';
+import Loader from '../../components/Loader';
+import useLoading from '../../hooks/useLoading';
 
 const LoginScreen = () => {
   const { t } = useTranslation();
@@ -14,6 +18,33 @@ const LoginScreen = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const navigation = useNavigation();
+  const dispatch = useAppDispatch();
+  const { loading, error } = useAppSelector((state) => state.auth);
+  const { isLoading, message, startLoading, stopLoading } = useLoading();
+
+  const handleLogin = async () => {
+    if (!email || !password) {
+      Alert.alert('Error', 'Please fill in all fields');
+      return;
+    }
+
+    startLoading('Signing in...');
+
+    try {
+      const result = await dispatch(loginUser({ email, password })).unwrap();
+      if (result) {
+        stopLoading();
+        navigation.navigate('HomeTabs');
+      }
+    } catch (error: any) {
+      stopLoading();
+      Alert.alert('Login Failed', error || 'Invalid email or password');
+    }
+  };
+
+  const handleForgotPassword = () => {
+    navigation.navigate('ForgotPassword');
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -52,11 +83,16 @@ const LoginScreen = () => {
             onRightIconPress={() => setShowPassword(!showPassword)}
           />
 
-          <TouchableOpacity style={styles.forgotBtn}>
+          <TouchableOpacity style={styles.forgotBtn} onPress={handleForgotPassword}>
             <Text style={styles.forgotText}>{t('auth.forgotPassword')}</Text>
           </TouchableOpacity>
 
-          <AppButton title={t('auth.login')} onPress={() => { navigation.navigate('HomeTabs') }} style={styles.signInBtn} />
+          <AppButton 
+            title={t('auth.login')} 
+            onPress={handleLogin} 
+            style={styles.signInBtn} 
+            loading={loading}
+          />
 
           <View style={styles.orRow}>
             <View style={styles.line} />
@@ -86,6 +122,12 @@ const LoginScreen = () => {
           </Text>
         </ScrollView>
       </KeyboardAvoidingView>
+      
+      <Loader 
+        visible={isLoading} 
+        message={message}
+        overlay={true}
+      />
     </SafeAreaView>
   );
 };

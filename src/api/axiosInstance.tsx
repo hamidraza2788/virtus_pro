@@ -16,25 +16,8 @@ const erpAxiosInstance = axios.create({
   withCredentials: true,
 });
 
-// Attach access token dynamically from Redux for both
-const attachToken = (config:any) => {
-  const token = store.getState().auth.accessToken;
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-};
-// Attach access token dynamically from Redux for both
-const attachTokenSecond = (config:any) => {
-  const token = 'eyJhbGciOiJIUzI1NiJ9.eyJkYXRlIjoxNzU1NzY3ODk3MDEzLCJzdWIiOiJURVNUVVNFUjAwMSIsInJvbGUiOiJNQU5BR0VSIEZJTkFOQ0UiLCJjb3N0Q2VudGVyIjoiMTAxIiwiaXNzIjoiVEVTVFVTRVIwMDEiLCJlbXBObyI6IjAyMDAiLCJ1c2VyTmFtZSI6IlRFU1QgVVNFUiAwMDEiLCJUb2tlblR5cGUiOiJhdXRoIiwiYXBwbGljYXRpb24iOiJSRVBPUlRTIiwicm9sZU5hbWUiOiJNQUFOR0VSIEZJTkFOQ0UiLCJleHAiOjE3NzM3Njc4OTcsImlhdCI6MTc1NTc2Nzg5NywianRpIjoiVEVTVFVTRVIwMDEifQ.mjCNq4Q-ZsxMjAFcLtiJVlSjYIMWlnUsk-nfhslt1BI';
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-};
-
-axiosInstance.interceptors.request.use(attachToken, (error) => Promise.reject(error));
-erpAxiosInstance.interceptors.request.use(attachTokenSecond, (error) => Promise.reject(error));
+// No token interceptors needed since backend doesn't require authentication
+// All endpoints are publicly accessible according to API documentation
 
 axiosInstance.interceptors.request.use((config) => {
   const fullUrl = config.baseURL

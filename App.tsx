@@ -13,6 +13,8 @@ import { Navigation } from './src/navigation';
 import { enableScreens } from 'react-native-screens';
 import { store } from './src/redux/store';
 import LanguageSync from './src/components/LanguageSync';
+import { LoaderProvider } from './src/contexts/LoaderContext';
+import GlobalLoader from './src/components/GlobalLoader';
 import './src/i18n'; // Initialize i18n
 
 enableScreens();
@@ -20,15 +22,18 @@ enableScreens();
 function App() {
   return (
     <Provider store={store}>
-      <SafeAreaProvider>
-        <LanguageSync />
-        <StatusBar 
-          barStyle="dark-content"
-          backgroundColor="transparent"
-          translucent={Platform.OS === 'android'}
-        />
-        <Navigation />
-      </SafeAreaProvider>
+      <LoaderProvider>
+        <SafeAreaProvider>
+          <LanguageSync />
+          <StatusBar 
+            barStyle="dark-content"
+            backgroundColor="transparent"
+            translucent={Platform.OS === 'android'}
+          />
+          <Navigation />
+          <GlobalLoader />
+        </SafeAreaProvider>
+      </LoaderProvider>
     </Provider>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, KeyboardAvoidingView, Platform, ScrollView, Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import AppInput from '../../components/AppInput';
 import AppButton from '../../components/AppButton';
@@ -7,6 +7,10 @@ import Images from '../../assets/images/ImagePath';
 import { Colors } from '../../utils';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { registerUser } from '../../redux/slices/authSlice';
+import Loader from '../../components/Loader';
+import useLoading from '../../hooks/useLoading';
 
 const SignupScreen = () => {
   const { t } = useTranslation();
@@ -20,6 +24,56 @@ const SignupScreen = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigation = useNavigation();
+  const dispatch = useAppDispatch();
+  const { loading, error } = useAppSelector((state) => state.auth);
+  const { isLoading, message, startLoading, stopLoading } = useLoading();
+
+  const validateForm = () => {
+    if (!firstName || !lastName || !email || !password) {
+      Alert.alert('Error', 'Please fill in all required fields');
+      return false;
+    }
+    
+    if (password.length < 6) {
+      Alert.alert('Error', 'Password must be at least 6 characters long');
+      return false;
+    }
+    
+    if (password !== confirmPassword) {
+      Alert.alert('Error', 'Passwords do not match');
+      return false;
+    }
+    
+    return true;
+  };
+
+  const handleSignup = async () => {
+    if (!validateForm()) return;
+
+    startLoading('Creating account...');
+
+    try {
+      const userData = {
+        first_name: firstName,
+        last_name: lastName,
+        email,
+        password,
+        phone: phone || undefined,
+        address: address || undefined,
+      };
+      
+      const result = await dispatch(registerUser(userData)).unwrap();
+      if (result) {
+        stopLoading();
+        Alert.alert('Success', 'Account created successfully! Please login.', [
+          { text: 'OK', onPress: () => navigation.navigate('Login') }
+        ]);
+      }
+    } catch (error: any) {
+      stopLoading();
+      Alert.alert('Registration Failed', error || 'Failed to create account');
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -99,7 +153,12 @@ const SignupScreen = () => {
             onRightIconPress={() => setShowConfirmPassword(!showConfirmPassword)}
           />
 
-          <AppButton title={t('auth.signup')} onPress={() => { navigation.navigate('Login') }} style={styles.signInBtn} />
+          <AppButton 
+            title={t('auth.signup')} 
+            onPress={handleSignup} 
+            style={styles.signInBtn} 
+            loading={loading}
+          />
 
           <View style={styles.orRow}>
             <View style={styles.line} />
@@ -129,6 +188,12 @@ const SignupScreen = () => {
           </Text>
         </ScrollView>
       </KeyboardAvoidingView>
+      
+      <Loader 
+        visible={isLoading} 
+        message={message}
+        overlay={true}
+      />
     </SafeAreaView>
   );
 };

@@ -21,6 +21,8 @@ import DealerScreen from "./screens/DealerScreen";
 import CatalogScreen from "./screens/CatalogScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import SignupScreen from "./screens/SignupScreen";
+import ResetPasswordScreen from "./screens/ResetPasswordScreen";
+import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
 import { Colors } from "../utils";
 
 
@@ -131,6 +133,18 @@ const RootStack = createNativeStackNavigator({
         headerShown: false,
       },
     },
+    ForgotPassword: {
+      screen: ForgotPasswordScreen,
+      options: {
+        headerShown: false,
+      },
+    },
+    ResetPassword: {
+      screen: ResetPasswordScreen,
+      options: {
+        headerShown: false,
+      },
+    },
     HomeTabs: {
       screen: BottomTabNavigator,
       options: {
@@ -149,9 +163,10 @@ type RootStackParamList = {
   SplashScreen: undefined;
   WelcomeScreen: undefined; // No params expected
     HomeTabs: undefined;
-  Login:undefined;
-  Signup:undefined;
- 
+  Login: undefined;
+  Signup: undefined;
+  ForgotPassword: undefined;
+  ResetPassword: { email?: string };
 };
 declare global {
   namespace ReactNavigation {

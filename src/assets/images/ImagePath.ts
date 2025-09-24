@@ -32,6 +32,9 @@ export default {
     locationIcon: require("./location.png"),
     phoneIcon: require("./phone.png"),
     LogoutIcon: require("./logout.png"),
+    CameraIcon: require("./cameraIcon.png"),
+    avatarIcon: require("./avatar.png"),
+
    
 
 

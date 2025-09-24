@@ -1,21 +1,70 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import Images from '../assets/images/ImagePath';
 import { Colors } from '../utils';
 import LanguageDropdown from './LanguageDropdown';
+import StorageUtils from '../utils/storage';
+import { getProfileImageUrl } from '../api/baseURL';
 
 const HomeHeader = () => {
   const { t } = useTranslation();
+  const [userProfileImage, setUserProfileImage] = useState<string | null>(null);
+  const [userName, setUserName] = useState<string>('');
+  // const [userLocation, setUserLocation] = useState<string>('');
+
+  useEffect(() => {
+    loadUserData();
+  }, []);
+
+  const loadUserData = async () => {
+    try {
+      const userData = await StorageUtils.getUserData();
+      if (userData) {
+        // Set user name
+        const fullName = `${userData.first_name || ''} ${userData.last_name || ''}`.trim();
+        setUserName(fullName || userData.email || 'User');
+        
+        // Set user location
+        // setUserLocation(userData.address || 'No location set');
+        
+        // Set profile image
+        const profileImageUrl = userData.profile_image_url || 
+                              getProfileImageUrl(userData.profile_image) || 
+                              null;
+        setUserProfileImage(profileImageUrl);
+        
+        console.log('HomeHeader: User data loaded:', {
+          name: fullName,
+          profileImage: profileImageUrl
+        });
+      }
+    } catch (error) {
+      console.error('HomeHeader: Error loading user data:', error);
+    }
+  };
 
   return (
     <View style={styles.header}>
-      <Image source={Images.Profile} style={styles.avatar} />
+      {userProfileImage ? (
+        <Image 
+          source={{ uri: userProfileImage }} 
+          style={styles.avatar}
+          onError={() => {
+            console.log('HomeHeader: Profile image failed to load, using default avatar');
+            setUserProfileImage(null);
+          }}
+        />
+      ) : (
+        <Image source={Images.avatarIcon} style={styles.avatar} />
+      )}
       <View style={styles.locationContainer}>
-        <Text style={styles.deliverTo}>
-          {t('home.deliverTo')} <Text style={styles.locationArrow}>▼</Text>
-        </Text>
-        <Text style={styles.location}>120 San Fransisco, USA</Text>
+        {userName ? (
+          <Text style={styles.userName}>{userName}</Text>
+        ) : (
+          <Text style={styles.userName}>Welcome!</Text>
+        )}
+        {/* <Text style={styles.location}>{userLocation}</Text> */}
       </View>
       <View style={styles.rightSection}>
         <LanguageDropdown style={styles.languageDropdown} />
@@ -46,6 +95,12 @@ const styles = StyleSheet.create({
     flex: 1, 
     marginLeft: 12 
   },
+  userName: { 
+    color: Colors.Black, 
+    fontWeight: 'bold', 
+    fontSize: 16,
+    marginBottom: 2
+  },
   deliverTo: { 
     color: Colors.primary, 
     fontWeight: '600', 
@@ -53,8 +108,8 @@ const styles = StyleSheet.create({
   },
   location: { 
     color: Colors.secondary, 
-    fontWeight: 'bold', 
-    fontSize: 15 
+    fontWeight: '500', 
+    fontSize: 13 
   },
   locationArrow: { 
     fontSize: 12 
