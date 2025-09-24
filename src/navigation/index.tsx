@@ -19,6 +19,7 @@ import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import DealerScreen from "./screens/DealerScreen";
 import CatalogScreen from "./screens/CatalogScreen";
+import ProductScreen from "./screens/ProductScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import SignupScreen from "./screens/SignupScreen";
 import ResetPasswordScreen from "./screens/ResetPasswordScreen";
@@ -152,6 +153,12 @@ const RootStack = createNativeStackNavigator({
         headerShown: false,
       },
     },
+    ProductScreen: {
+      screen: ProductScreen,
+      options: {
+        headerShown: false,
+      },
+    },
    
   },
 });
@@ -167,6 +174,12 @@ type RootStackParamList = {
   Signup: undefined;
   ForgotPassword: undefined;
   ResetPassword: { email?: string };
+  ProductScreen: { 
+    catalogue: { 
+      name: string; 
+      image: string; 
+    }; 
+  };
 };
 declare global {
   namespace ReactNavigation {

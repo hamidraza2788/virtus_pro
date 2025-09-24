@@ -20,10 +20,10 @@ const HomeScreen = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <HomeHeader />
         <SearchBar />
-        <CategoryChips />
+        {/* <CategoryChips /> */}
         <FeaturedProductsCarousel />
         <SectionHeader title={t('catalog.featured')} showSeeAll />
-        <TabChips />
+        {/* <TabChips /> */}
         <ProductList /> 
       </ScrollView>
     </SafeAreaView>

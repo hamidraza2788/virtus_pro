@@ -47,10 +47,10 @@ const ProductList = () => (
           <Text style={styles.desc}>{item.desc}</Text>
           <View style={styles.row}>
             <Text style={styles.price}>{item.price}</Text>
-            <Text style={styles.oldPrice}>{item.oldPrice}</Text>
+            {/* <Text style={styles.oldPrice}>{item.oldPrice}</Text> */}
           </View>
         </View>
-        <View style={styles.qtyBox}>
+        {/* <View style={styles.qtyBox}>
             <TouchableOpacity style={styles.minusBtn}>
             <Text style={styles.minus}>-</Text>
           </TouchableOpacity>
@@ -58,7 +58,7 @@ const ProductList = () => (
           <TouchableOpacity style={styles.plusBtn}>
             <Text style={styles.plus}>+</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
       </View>
     )}
      scrollEnabled={false} // <-- Add this line

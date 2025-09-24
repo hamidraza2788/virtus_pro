@@ -1,7 +1,7 @@
 // export const API_BASE_URL = "http://localhost:3001/api/v1";
 // export const API_BASE_URL = "http://134.199.140.30:3001/api/v1";
 export const API_BASE_URL = "http://localhost:8888/virtus_pro/api";
-export const ERP_API_URL = "http://13.201.161.9:8093/ms-web/api";
+export const VIRTUS_API_URL = "https://virtus-lieferung.de/api/v1";
 
 // Image path utilities
 export const IMAGE_BASE_URL = "http://localhost:8888/virtus_pro";
@@ -19,7 +19,7 @@ export const getProfileImageUrl = (imageName) => {
   return `${IMAGE_BASE_URL}/uploads/profile_images/${imageName}`;
 };
 
-// Generic image URL utility
+// General image path utilities
 export const getImageUrl = (imageName, folder = 'uploads') => {
   if (!imageName) return null;
   
@@ -32,12 +32,13 @@ export const getImageUrl = (imageName, folder = 'uploads') => {
   return `${IMAGE_BASE_URL}/${folder}/${imageName}`;
 };
 
-// Product image URL utility
+// Product image path utilities
 export const getProductImageUrl = (imageName) => {
   return getImageUrl(imageName, 'uploads/products');
 };
 
-// Category image URL utility
+// Category image path utilities
 export const getCategoryImageUrl = (imageName) => {
   return getImageUrl(imageName, 'uploads/categories');
 };
+

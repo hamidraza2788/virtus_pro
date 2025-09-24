@@ -34,6 +34,7 @@ export default {
     LogoutIcon: require("./logout.png"),
     CameraIcon: require("./cameraIcon.png"),
     avatarIcon: require("./avatar.png"),
+    arrowIcon: require("./arrow.png"),
 
    
 

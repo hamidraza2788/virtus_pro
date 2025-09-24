@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_BASE_URL, ERP_API_URL } from "./baseURL";
+import { API_BASE_URL, VIRTUS_API_URL } from "./baseURL";
 import { store } from "../redux/store";
 
 // Default API instance
@@ -10,8 +10,8 @@ const axiosInstance = axios.create({
 });
 
 // ERP API instance
-const erpAxiosInstance = axios.create({
-  baseURL: ERP_API_URL,
+const virtusAxiosInstance = axios.create({
+  baseURL: VIRTUS_API_URL,
   headers: { "Content-Type": "application/json" },
   withCredentials: true,
 });
@@ -26,7 +26,7 @@ axiosInstance.interceptors.request.use((config) => {
   return config;
 });
 
-erpAxiosInstance.interceptors.request.use((config) => {
+virtusAxiosInstance.interceptors.request.use((config) => {
   const fullUrl = config.baseURL
     ? config.baseURL.replace(/\/+$/, "") + "/" + (config.url || "").replace(/^\/+/, "")
     : config.url;
@@ -34,4 +34,4 @@ erpAxiosInstance.interceptors.request.use((config) => {
 });
 
 
-export { axiosInstance, erpAxiosInstance };
+export { axiosInstance, virtusAxiosInstance };

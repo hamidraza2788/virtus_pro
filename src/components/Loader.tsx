@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     height,
   },
   container: {
-    backgroundColor: Colors.White,
+    // backgroundColor: Colors.White,
     padding: 24,
     borderRadius: 12,
     alignItems: 'center',
