@@ -105,11 +105,11 @@ const ProductScreen = () => {
   // Handle product press
   const handleProductPress = (product: Product) => {
     console.log('Product pressed:', product.name);
-    Alert.alert(
-      'Product Details',
-      `Name: ${product.name}\nPrice: ${product.list_price}\nID: ${product.product_id}`,
-      [{ text: 'OK' }]
-    );
+    
+    // Navigate to ProductDetailScreen with product ID
+    (navigation as any).navigate('ProductDetailScreen', {
+      productId: product.product_id,
+    });
   };
 
   // Get localized description based on current language

@@ -6,6 +6,7 @@ import authSlice from './slices/authSlice';
 import languageSlice from './slices/languageSlice';
 import catalogSlice from './slices/catalogSlice';
 import productsSlice from './slices/productsSlice';
+import productDetailSlice from './slices/productDetailSlice';
 
 // Configuration for redux-persist
 const persistConfig = {
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   language: languageSlice,
   catalog: catalogSlice,
   products: productsSlice,
+  productDetail: productDetailSlice,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 // Configure store
