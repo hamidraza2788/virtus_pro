@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "312747520387",
+    "project_id": "virtus-473215",
+    "storage_bucket": "virtus-473215.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:312747520387:android:47f5738f137374054bc6b6",
+        "android_client_info": {
+          "package_name": "com.virtus_pro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "312747520387-5jeleaou4meuhuee584tda1ov5sfggqg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.virtus_pro",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxLTyJJC_TLNwPi4usx41ymCZrEjScw5I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

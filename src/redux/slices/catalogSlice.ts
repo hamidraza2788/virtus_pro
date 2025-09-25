@@ -24,7 +24,6 @@ interface CatalogState {
   currentOffset: number;
   totalItems: number;
   hasMoreItems: boolean;
-  origin: string;
 }
 
 const initialState: CatalogState = {
@@ -36,18 +35,17 @@ const initialState: CatalogState = {
   currentOffset: 0,
   totalItems: 0,
   hasMoreItems: false,
-  origin: 'IT', // Default origin
 };
 
 // Async thunks
 export const loadInitialCatalog = createAsyncThunk(
   'catalog/loadInitial',
-  async (origin: string = 'IT', { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
-      logRedux('Loading initial catalog', { origin });
-      const response = await fetchInitialCatalog(origin);
+      logRedux('Loading initial catalog');
+      const response = await fetchInitialCatalog();
       logRedux('Initial catalog loaded successfully', {
-        itemsCount: response.catalogues.length,
+        itemsCount: response.categories.length,
         total: response.total,
       });
       return response;
@@ -60,15 +58,12 @@ export const loadInitialCatalog = createAsyncThunk(
 
 export const loadMoreCatalog = createAsyncThunk(
   'catalog/loadMore',
-  async (params: { origin: string; currentOffset: number }, { rejectWithValue }) => {
+  async (currentOffset: number, { rejectWithValue }) => {
     try {
-      logRedux('Loading more catalog items', params);
-      const response = await fetchNextCatalogPage(
-        params.currentOffset,
-        params.origin
-      );
+      logRedux('Loading more catalog items', { currentOffset });
+      const response = await fetchNextCatalogPage(currentOffset);
       logRedux('More catalog items loaded successfully', {
-        newItemsCount: response.catalogues.length,
+        newItemsCount: response.categories.length,
         newOffset: response.offset,
       });
       return response;
@@ -81,12 +76,12 @@ export const loadMoreCatalog = createAsyncThunk(
 
 export const refreshCatalogData = createAsyncThunk(
   'catalog/refresh',
-  async (origin: string = 'IT', { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
-      logRedux('Refreshing catalog data', { origin });
-      const response = await refreshCatalog(origin);
+      logRedux('Refreshing catalog data');
+      const response = await refreshCatalog();
       logRedux('Catalog data refreshed successfully', {
-        itemsCount: response.catalogues.length,
+        itemsCount: response.categories.length,
         total: response.total,
       });
       return response;
@@ -110,10 +105,6 @@ const catalogSlice = createSlice({
       state.hasMoreItems = false;
       state.error = null;
     },
-    setOrigin: (state, action: PayloadAction<string>) => {
-      logRedux('Setting catalog origin', action.payload);
-      state.origin = action.payload;
-    },
     clearError: (state) => {
       state.error = null;
     },
@@ -128,15 +119,14 @@ const catalogSlice = createSlice({
       })
       .addCase(loadInitialCatalog.fulfilled, (state, action) => {
         logRedux('Loading initial catalog - fulfilled', {
-          itemsCount: action.payload.catalogues.length,
+          itemsCount: action.payload.categories.length,
           total: action.payload.total,
         });
         state.isLoading = false;
-        state.items = action.payload.catalogues;
-        state.currentOffset = action.payload.offset + action.payload.catalogues.length;
+        state.items = action.payload.categories;
+        state.currentOffset = action.payload.offset + action.payload.categories.length;
         state.totalItems = action.payload.total;
         state.hasMoreItems = state.currentOffset < action.payload.total;
-        state.origin = action.payload.origin;
         state.error = null;
       })
       .addCase(loadInitialCatalog.rejected, (state, action) => {
@@ -154,12 +144,12 @@ const catalogSlice = createSlice({
       })
       .addCase(loadMoreCatalog.fulfilled, (state, action) => {
         logRedux('Loading more catalog - fulfilled', {
-          newItemsCount: action.payload.catalogues.length,
-          totalItems: state.items.length + action.payload.catalogues.length,
+          newItemsCount: action.payload.categories.length,
+          totalItems: state.items.length + action.payload.categories.length,
         });
         state.isLoadingMore = false;
-        state.items = [...state.items, ...action.payload.catalogues];
-        state.currentOffset = action.payload.offset + action.payload.catalogues.length;
+        state.items = [...state.items, ...action.payload.categories];
+        state.currentOffset = action.payload.offset + action.payload.categories.length;
         state.hasMoreItems = state.currentOffset < action.payload.total;
         state.error = null;
       })
@@ -178,15 +168,14 @@ const catalogSlice = createSlice({
       })
       .addCase(refreshCatalogData.fulfilled, (state, action) => {
         logRedux('Refreshing catalog - fulfilled', {
-          itemsCount: action.payload.catalogues.length,
+          itemsCount: action.payload.categories.length,
           total: action.payload.total,
         });
         state.isRefreshing = false;
-        state.items = action.payload.catalogues;
-        state.currentOffset = action.payload.offset + action.payload.catalogues.length;
+        state.items = action.payload.categories;
+        state.currentOffset = action.payload.offset + action.payload.categories.length;
         state.totalItems = action.payload.total;
         state.hasMoreItems = state.currentOffset < action.payload.total;
-        state.origin = action.payload.origin;
         state.error = null;
       })
       .addCase(refreshCatalogData.rejected, (state, action) => {
@@ -197,5 +186,5 @@ const catalogSlice = createSlice({
   },
 });
 
-export const { clearCatalog, setOrigin, clearError } = catalogSlice.actions;
+export const { clearCatalog, clearError } = catalogSlice.actions;
 export default catalogSlice.reducer;

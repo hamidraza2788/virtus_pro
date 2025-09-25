@@ -15,7 +15,7 @@ const CatalogScreen = () => {
   // Load initial catalog data when component mounts
   useEffect(() => {
     console.log('CatalogScreen: Loading initial catalog data...');
-    dispatch(loadInitialCatalog('IT')); // Default origin is IT
+    dispatch(loadInitialCatalog());
   }, [dispatch]);
 
   // Note: Catalog navigation is now handled in CatalogGrid component

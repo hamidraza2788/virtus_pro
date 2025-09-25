@@ -1,7 +1,7 @@
 // export const API_BASE_URL = "http://localhost:3001/api/v1";
 // export const API_BASE_URL = "http://134.199.140.30:3001/api/v1";
 export const API_BASE_URL = "http://localhost:8888/virtus_pro/api";
-export const VIRTUS_API_URL = "https://virtus-lieferung.de/api/v1";
+export const VIRTUS_API_URL = "https://virtus-lieferung.de/api/v2";
 
 // Image path utilities
 export const IMAGE_BASE_URL = "http://localhost:8888/virtus_pro";
