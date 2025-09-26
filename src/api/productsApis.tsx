@@ -2,33 +2,29 @@ import { virtusAxiosInstance } from './axiosInstance';
 
 // API Configuration
 const STATIC_TOKEN = '4c8a2f97a3f54d58b5e9e2d6d7c4a1b2';
-const DEFAULT_ORIGIN = 'IT';
 const DEFAULT_LIMIT = 20;
 const DEFAULT_SORT = 'asc';
+const DEFAULT_LANG = 'en';
 
 // Types for Products API
-export interface ShortDescriptions {
-  en: string;
-  de: string;
-  it: string;
-  fr: string;
-  es: string;
-  pt: string;
+export interface ProductImages {
+  featured: string;
+  gallery: string[];
 }
 
 export interface Product {
   product_id: string;
+  gtin: string;
+  collection_name: string;
+  price: string;
   name: string;
-  short_descriptions: ShortDescriptions;
-  list_price: string;
-  origin: string;
-  image: string;
+  images: ProductImages;
 }
 
 export interface ProductsResponse {
+  collection_name: string;
+  language: string;
   products: Product[];
-  catalogue: string;
-  origin: string;
   offset: number;
   limit: number;
   total: number;
@@ -36,11 +32,11 @@ export interface ProductsResponse {
 
 export interface ProductsRequest {
   token?: string;
-  catalogue: string;
+  collection_name: string;
   offset?: number;
   limit?: number;
   sort?: 'asc' | 'desc';
-  origin?: string;
+  lang?: string;
 }
 
 // Custom logger for API calls
@@ -62,11 +58,11 @@ export const fetchProductsApi = async (params: ProductsRequest): Promise<Product
     // Prepare request data with defaults
     const requestData = {
       token: params.token || STATIC_TOKEN,
-      catalogue: params.catalogue,
+      collection_name: params.collection_name,
       offset: params.offset || 0,
       limit: params.limit || DEFAULT_LIMIT,
       sort: params.sort || DEFAULT_SORT,
-      origin: params.origin || DEFAULT_ORIGIN,
+      lang: params.lang || DEFAULT_LANG,
     };
 
     logAPI('Request data prepared', requestData);
@@ -82,7 +78,8 @@ export const fetchProductsApi = async (params: ProductsRequest): Promise<Product
       status: response.status,
       dataLength: response.data.products?.length || 0,
       total: response.data.total,
-      catalogue: response.data.catalogue,
+      collection_name: response.data.collection_name,
+      language: response.data.language,
     });
 
     return response.data;
@@ -100,17 +97,17 @@ export const fetchProductsApi = async (params: ProductsRequest): Promise<Product
 
 /**
  * Fetch initial products data (first page)
- * @param catalogue - Catalogue name to fetch products for
- * @param origin - Origin country code (default: IT)
+ * @param collection_name - Collection name to fetch products for
+ * @param lang - Language code (default: en)
  * @returns Promise<ProductsResponse>
  */
 export const fetchInitialProducts = async (
-  catalogue: string,
-  origin: string = DEFAULT_ORIGIN
+  collection_name: string,
+  lang: string = DEFAULT_LANG
 ): Promise<ProductsResponse> => {
   return fetchProductsApi({
-    catalogue,
-    origin,
+    collection_name,
+    lang,
     offset: 0,
     limit: DEFAULT_LIMIT,
     sort: DEFAULT_SORT,
@@ -119,23 +116,23 @@ export const fetchInitialProducts = async (
 
 /**
  * Fetch next page of products data
- * @param catalogue - Catalogue name
+ * @param collection_name - Collection name
  * @param currentOffset - Current offset
- * @param origin - Origin country code
+ * @param lang - Language code
  * @param limit - Number of items to fetch (default: 20)
  * @param sort - Sort order (default: asc)
  * @returns Promise<ProductsResponse>
  */
 export const fetchNextProductsPage = async (
-  catalogue: string,
+  collection_name: string,
   currentOffset: number,
-  origin: string = DEFAULT_ORIGIN,
+  lang: string = DEFAULT_LANG,
   limit: number = DEFAULT_LIMIT,
   sort: 'asc' | 'desc' = DEFAULT_SORT
 ): Promise<ProductsResponse> => {
   return fetchProductsApi({
-    catalogue,
-    origin,
+    collection_name,
+    lang,
     offset: currentOffset,
     limit,
     sort,
@@ -144,19 +141,19 @@ export const fetchNextProductsPage = async (
 
 /**
  * Refresh products data (reset to first page)
- * @param catalogue - Catalogue name
- * @param origin - Origin country code
+ * @param collection_name - Collection name
+ * @param lang - Language code
  * @param sort - Sort order (default: asc)
  * @returns Promise<ProductsResponse>
  */
 export const refreshProducts = async (
-  catalogue: string,
-  origin: string = DEFAULT_ORIGIN,
+  collection_name: string,
+  lang: string = DEFAULT_LANG,
   sort: 'asc' | 'desc' = DEFAULT_SORT
 ): Promise<ProductsResponse> => {
   return fetchProductsApi({
-    catalogue,
-    origin,
+    collection_name,
+    lang,
     offset: 0,
     limit: DEFAULT_LIMIT,
     sort,
@@ -165,16 +162,16 @@ export const refreshProducts = async (
 
 /**
  * Search products with specific parameters
- * @param catalogue - Catalogue name
+ * @param collection_name - Collection name
  * @param searchParams - Additional search parameters
  * @returns Promise<ProductsResponse>
  */
 export const searchProducts = async (
-  catalogue: string,
+  collection_name: string,
   searchParams: Partial<ProductsRequest> = {}
 ): Promise<ProductsResponse> => {
   return fetchProductsApi({
-    catalogue,
+    collection_name,
     ...searchParams,
   });
 };
@@ -186,7 +183,7 @@ export default {
   refreshProducts,
   searchProducts,
   STATIC_TOKEN,
-  DEFAULT_ORIGIN,
   DEFAULT_LIMIT,
   DEFAULT_SORT,
+  DEFAULT_LANG,
 };

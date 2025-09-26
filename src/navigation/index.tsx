@@ -19,6 +19,7 @@ import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import DealerScreen from "./screens/DealerScreen";
 import CatalogScreen from "./screens/CatalogScreen";
+import SubCategoryScreen from "./screens/SubCategoryScreen";
 import ProductScreen from "./screens/ProductScreen";
 import ProductDetailScreen from "./screens/ProductDetailScreen";
 import ProfileScreen from "./screens/ProfileScreen";
@@ -154,6 +155,12 @@ const RootStack = createNativeStackNavigator({
         headerShown: false,
       },
     },
+    SubCategoryScreen: {
+      screen: SubCategoryScreen,
+      options: {
+        headerShown: false,
+      },
+    },
     ProductScreen: {
       screen: ProductScreen,
       options: {
@@ -181,10 +188,14 @@ type RootStackParamList = {
   Signup: undefined;
   ForgotPassword: undefined;
   ResetPassword: { email?: string };
+  SubCategoryScreen: { 
+    categoryName: string; 
+  };
   ProductScreen: { 
     catalogue: { 
       name: string; 
       image: string; 
+      collection_name?: string;
     }; 
   };
   ProductDetailScreen: { 

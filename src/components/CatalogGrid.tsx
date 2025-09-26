@@ -62,12 +62,9 @@ const CatalogGrid: React.FC<CatalogGridProps> = ({ onCatalogPress }) => {
     if (onCatalogPress) {
       onCatalogPress(catalog);
     } else {
-      // Navigate to ProductScreen with catalog data
-      (navigation as any).navigate('ProductScreen', {
-        catalogue: {
-          name: catalog.name,
-          image: catalog.image,
-        },
+      // Navigate to SubCategoryScreen with category name
+      (navigation as any).navigate('SubCategoryScreen', {
+        categoryName: catalog.name,
       });
     }
   };

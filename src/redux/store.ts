@@ -5,6 +5,7 @@ import { persistStore, persistReducer } from 'redux-persist';
 import authSlice from './slices/authSlice';
 import languageSlice from './slices/languageSlice';
 import catalogSlice from './slices/catalogSlice';
+import subCategorySlice from './slices/subCategorySlice';
 import productsSlice from './slices/productsSlice';
 import productDetailSlice from './slices/productDetailSlice';
 
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   auth: authSlice,
   language: languageSlice,
   catalog: catalogSlice,
+  subCategory: subCategorySlice,
   products: productsSlice,
   productDetail: productDetailSlice,
 });

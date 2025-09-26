@@ -31,6 +31,7 @@ interface RouteParams {
   catalogue: {
     name: string;
     image: string;
+    collection_name?: string;
   };
 }
 
@@ -46,8 +47,8 @@ const ProductScreen = () => {
     isLoadingMore, 
     error, 
     hasMoreItems,
-    catalogue,
-    origin 
+    collection_name,
+    language 
   } = useAppSelector((state) => state.products);
 
   const { catalogue: selectedCatalogue } = route.params as RouteParams;
@@ -55,15 +56,15 @@ const ProductScreen = () => {
 
   // Load initial products when component mounts
   useEffect(() => {
-    console.log('ProductScreen: Loading products for catalogue:', selectedCatalogue.name);
+    console.log('ProductScreen: Loading products for collection:', selectedCatalogue.collection_name || selectedCatalogue.name);
     
     // Clear previous products data
     dispatch(clearProducts());
     
     // Load initial products
     dispatch(loadInitialProducts({
-      catalogue: selectedCatalogue.name,
-      origin: 'IT', // Default origin, can be made dynamic
+      collection_name: selectedCatalogue.collection_name || selectedCatalogue.name,
+      lang: currentLanguage,
       sort: 'asc',
     }));
 
@@ -72,7 +73,7 @@ const ProductScreen = () => {
       console.log('ProductScreen: Component unmounting, clearing products');
       dispatch(clearProducts());
     };
-  }, [dispatch, selectedCatalogue.name]);
+  }, [dispatch, selectedCatalogue.collection_name || selectedCatalogue.name, currentLanguage]);
 
   // Listen for language changes
   useEffect(() => {
@@ -84,9 +85,9 @@ const ProductScreen = () => {
     if (!isLoadingMore && hasMoreItems) {
       console.log('Loading more products...');
       dispatch(loadMoreProducts({
-        catalogue: selectedCatalogue.name,
+        collection_name: selectedCatalogue.collection_name || selectedCatalogue.name,
         currentOffset: products.length,
-        origin: 'IT',
+        lang: currentLanguage,
         sort: 'asc',
       }));
     }
@@ -96,8 +97,8 @@ const ProductScreen = () => {
   const handleRefresh = () => {
     console.log('Refreshing products data...');
     dispatch(refreshProductsData({
-      catalogue: selectedCatalogue.name,
-      origin: 'IT',
+      collection_name: selectedCatalogue.collection_name || selectedCatalogue.name,
+      lang: currentLanguage,
       sort: 'asc',
     }));
   };
@@ -112,25 +113,8 @@ const ProductScreen = () => {
     });
   };
 
-  // Get localized description based on current language
-  const getLocalizedDescription = (shortDescriptions: any) => {
-    const langMap: { [key: string]: string } = {
-      'en': 'en',
-      'de': 'de', 
-      'it': 'it',
-      'fr': 'fr',
-      'es': 'es',
-      'pt': 'pt',
-    };
-
-    const currentLang = langMap[currentLanguage] || 'en';
-    return shortDescriptions[currentLang] || shortDescriptions.en || 'No description available';
-  };
-
   // Render product item
   const renderProductItem = ({ item }: { item: Product }) => {
-    const localizedDescription = getLocalizedDescription(item.short_descriptions);
-    
     return (
       <TouchableOpacity
         style={styles.card}
@@ -138,7 +122,7 @@ const ProductScreen = () => {
         activeOpacity={0.7}
       >
         <Image
-          source={{ uri: item.image }}
+          source={{ uri: item.images.featured }}
           style={styles.image}
           resizeMode="cover"
           onError={() => console.log('Image load error for:', item.name)}
@@ -148,11 +132,11 @@ const ProductScreen = () => {
             {item.name}
           </Text>
           <Text style={styles.desc} numberOfLines={2}>
-            {localizedDescription}
+            {item.collection_name}
           </Text>
           <View style={styles.row}>
-            <Text style={styles.price}>${item.list_price}</Text>
-            {/* <Text style={styles.origin}>Origin: {item.origin}</Text> */}
+            <Text style={styles.price}>${item.price.trim()}</Text>
+            {/* <Text style={styles.gtin}>GTIN: {item.gtin || 'N/A'}</Text> */}
           </View>
         </View>
       </TouchableOpacity>
@@ -369,7 +353,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
   },
-  origin: {
+  gtin: {
     color: Colors.secondary,
     fontSize: 10,
     fontStyle: 'italic',

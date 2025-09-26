@@ -24,8 +24,8 @@ interface ProductsState {
   currentOffset: number;
   totalItems: number;
   hasMoreItems: boolean;
-  catalogue: string;
-  origin: string;
+  collection_name: string;
+  language: string;
   sort: 'asc' | 'desc';
 }
 
@@ -38,25 +38,26 @@ const initialState: ProductsState = {
   currentOffset: 0,
   totalItems: 0,
   hasMoreItems: false,
-  catalogue: '',
-  origin: 'IT', // Default origin
+  collection_name: '',
+  language: 'en', // Default language
   sort: 'asc', // Default sort
 };
 
 // Async thunks
 export const loadInitialProducts = createAsyncThunk(
   'products/loadInitial',
-  async (params: { catalogue: string; origin?: string; sort?: 'asc' | 'desc' }, { rejectWithValue }) => {
+  async (params: { collection_name: string; lang?: string; sort?: 'asc' | 'desc' }, { rejectWithValue }) => {
     try {
       logRedux('Loading initial products', params);
       const response = await fetchInitialProducts(
-        params.catalogue,
-        params.origin || 'IT'
+        params.collection_name,
+        params.lang || 'en'
       );
       logRedux('Initial products loaded successfully', {
         itemsCount: response.products.length,
         total: response.total,
-        catalogue: response.catalogue,
+        collection_name: response.collection_name,
+        language: response.language,
       });
       return response;
     } catch (error: any) {
@@ -69,17 +70,17 @@ export const loadInitialProducts = createAsyncThunk(
 export const loadMoreProducts = createAsyncThunk(
   'products/loadMore',
   async (params: { 
-    catalogue: string; 
+    collection_name: string; 
     currentOffset: number; 
-    origin?: string; 
+    lang?: string; 
     sort?: 'asc' | 'desc' 
   }, { rejectWithValue }) => {
     try {
       logRedux('Loading more products', params);
       const response = await fetchNextProductsPage(
-        params.catalogue,
+        params.collection_name,
         params.currentOffset,
-        params.origin || 'IT',
+        params.lang || 'en',
         20, // Default limit
         params.sort || 'asc'
       );
@@ -99,21 +100,22 @@ export const loadMoreProducts = createAsyncThunk(
 export const refreshProductsData = createAsyncThunk(
   'products/refresh',
   async (params: { 
-    catalogue: string; 
-    origin?: string; 
+    collection_name: string; 
+    lang?: string; 
     sort?: 'asc' | 'desc' 
   }, { rejectWithValue }) => {
     try {
       logRedux('Refreshing products data', params);
       const response = await refreshProducts(
-        params.catalogue,
-        params.origin || 'IT',
+        params.collection_name,
+        params.lang || 'en',
         params.sort || 'asc'
       );
       logRedux('Products data refreshed successfully', {
         itemsCount: response.products.length,
         total: response.total,
-        catalogue: response.catalogue,
+        collection_name: response.collection_name,
+        language: response.language,
       });
       return response;
     } catch (error: any) {
@@ -134,16 +136,16 @@ const productsSlice = createSlice({
       state.currentOffset = 0;
       state.totalItems = 0;
       state.hasMoreItems = false;
-      state.catalogue = '';
+      state.collection_name = '';
       state.error = null;
     },
-    setCatalogue: (state, action: PayloadAction<string>) => {
-      logRedux('Setting products catalogue', action.payload);
-      state.catalogue = action.payload;
+    setCollectionName: (state, action: PayloadAction<string>) => {
+      logRedux('Setting products collection name', action.payload);
+      state.collection_name = action.payload;
     },
-    setOrigin: (state, action: PayloadAction<string>) => {
-      logRedux('Setting products origin', action.payload);
-      state.origin = action.payload;
+    setLanguage: (state, action: PayloadAction<string>) => {
+      logRedux('Setting products language', action.payload);
+      state.language = action.payload;
     },
     setSort: (state, action: PayloadAction<'asc' | 'desc'>) => {
       logRedux('Setting products sort order', action.payload);
@@ -165,15 +167,16 @@ const productsSlice = createSlice({
         logRedux('Loading initial products - fulfilled', {
           itemsCount: action.payload.products.length,
           total: action.payload.total,
-          catalogue: action.payload.catalogue,
+          collection_name: action.payload.collection_name,
+          language: action.payload.language,
         });
         state.isLoading = false;
         state.items = action.payload.products;
         state.currentOffset = action.payload.offset + action.payload.products.length;
         state.totalItems = action.payload.total;
         state.hasMoreItems = state.currentOffset < action.payload.total;
-        state.catalogue = action.payload.catalogue;
-        state.origin = action.payload.origin;
+        state.collection_name = action.payload.collection_name;
+        state.language = action.payload.language;
         state.error = null;
       })
       .addCase(loadInitialProducts.rejected, (state, action) => {
@@ -217,15 +220,16 @@ const productsSlice = createSlice({
         logRedux('Refreshing products - fulfilled', {
           itemsCount: action.payload.products.length,
           total: action.payload.total,
-          catalogue: action.payload.catalogue,
+          collection_name: action.payload.collection_name,
+          language: action.payload.language,
         });
         state.isRefreshing = false;
         state.items = action.payload.products;
         state.currentOffset = action.payload.offset + action.payload.products.length;
         state.totalItems = action.payload.total;
         state.hasMoreItems = state.currentOffset < action.payload.total;
-        state.catalogue = action.payload.catalogue;
-        state.origin = action.payload.origin;
+        state.collection_name = action.payload.collection_name;
+        state.language = action.payload.language;
         state.error = null;
       })
       .addCase(refreshProductsData.rejected, (state, action) => {
@@ -238,8 +242,8 @@ const productsSlice = createSlice({
 
 export const { 
   clearProducts, 
-  setCatalogue, 
-  setOrigin, 
+  setCollectionName, 
+  setLanguage, 
   setSort, 
   clearError 
 } = productsSlice.actions;
