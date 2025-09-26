@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, KeyboardAvoidingView, Platform, ScrollView, Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import AppInput from '../../components/AppInput';
@@ -8,9 +8,10 @@ import { Colors } from '../../utils';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { loginUser } from '../../redux/slices/authSlice';
+import { loginUser, socialLogin } from '../../redux/slices/authSlice';
 import Loader from '../../components/Loader';
 import useLoading from '../../hooks/useLoading';
+import GoogleSignInService from '../../services/googleSignInService';
 
 const LoginScreen = () => {
   const { t } = useTranslation();
@@ -21,6 +22,11 @@ const LoginScreen = () => {
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.auth);
   const { isLoading, message, startLoading, stopLoading } = useLoading();
+
+  // Initialize Google Sign-In
+  useEffect(() => {
+    GoogleSignInService.initialize();
+  }, []);
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -44,6 +50,38 @@ const LoginScreen = () => {
 
   const handleForgotPassword = () => {
     navigation.navigate('ForgotPassword');
+  };
+
+  const handleGoogleSignIn = async () => {
+    startLoading('Signing in with Google...');
+    
+    try {
+      const result = await GoogleSignInService.signIn();
+      
+      if (result.success) {
+        // Use Redux action for social login (same as regular login)
+        try {
+          const socialLoginResult = await dispatch(socialLogin({
+            email: result.user.email,
+            name: result.user.name,
+          })).unwrap();
+          
+          if (socialLoginResult) {
+            stopLoading();
+            navigation.navigate('HomeTabs');
+          }
+        } catch (error: any) {
+          stopLoading();
+          Alert.alert('Social Login Failed', error || 'Failed to authenticate with server');
+        }
+      } else {
+        stopLoading();
+        Alert.alert('Google Sign-In Failed', result.error || 'Failed to sign in with Google');
+      }
+    } catch (error: any) {
+      stopLoading();
+      Alert.alert('Google Sign-In Error', error.message || 'Something went wrong with Google Sign-In');
+    }
   };
 
   return (
@@ -100,14 +138,17 @@ const LoginScreen = () => {
             <View style={styles.line} />
           </View>
 
-          <TouchableOpacity style={styles.socialBtn}>
-            <Image source={Images.AppleIcon} style={styles.socialIcon} />
-            <Text style={styles.socialText}>{t('auth.signInWithApple')}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.socialBtn}>
-            <Image source={Images.GoogleIcon} style={styles.socialIcon} />
-            <Text style={styles.socialText}>{t('auth.signInWithGoogle')}</Text>
-          </TouchableOpacity>
+          {Platform.OS === 'ios' ? (
+            <TouchableOpacity style={styles.socialBtn}>
+              <Image source={Images.AppleIcon} style={styles.socialIcon} />
+              <Text style={styles.socialText}>{t('auth.signInWithApple')}</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity style={styles.socialBtn} onPress={handleGoogleSignIn}>
+              <Image source={Images.GoogleIcon} style={styles.socialIcon} />
+              <Text style={styles.socialText}>{t('auth.signInWithGoogle')}</Text>
+            </TouchableOpacity>
+          )}
 
           <View style={styles.signupRow}>
             <Text style={styles.signupText}>{t('auth.dontHaveAccount')} </Text>

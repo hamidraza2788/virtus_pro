@@ -1,5 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { loginUserApi, logoutUserApi, registerUserApi, fetchUserApi, forgotPasswordApi, resetPasswordApi, updateProfileApi, updateProfileWithImageApi } from "../../api/authApis";
+import { loginUserApi, logoutUserApi, registerUserApi, fetchUserApi, forgotPasswordApi, resetPasswordApi, updateProfileApi, updateProfileWithImageApi, socialLoginApi } from "../../api/authApis";
 import StorageUtils from "../../utils/storage";
 
 export interface ProviderItem {
@@ -63,6 +63,24 @@ export const loginUser = createAsyncThunk(
       return response.data;
     } catch (error: any) {
       return rejectWithValue(error?.message || "Login failed");
+    }
+  }
+);
+
+// Async thunk for social login (Google Sign-In)
+export const socialLogin = createAsyncThunk(
+  "auth/socialLogin",
+  async (userData: { email: string; name: string }, { rejectWithValue }) => {
+    try {
+      const response = await socialLoginApi(userData);
+      const { user } = response.data;
+      
+      // Save authentication data to localStorage (no token needed)
+      await StorageUtils.saveAuthData(user, '', '');
+      
+      return response.data;
+    } catch (error: any) {
+      return rejectWithValue(error?.message || "Social login failed");
     }
   }
 );
@@ -232,6 +250,19 @@ const authSlice = createSlice({
         state.isAuthenticated = false;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.isAuthenticated = true;
+        state.loading = false;
+      })
+      .addCase(socialLogin.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(socialLogin.rejected, (state, action) => {
+        state.error = action.payload as string;
+        state.loading = false;
+        state.isAuthenticated = false;
+      })
+      .addCase(socialLogin.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.isAuthenticated = true;
         state.loading = false;

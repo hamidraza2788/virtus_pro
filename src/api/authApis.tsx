@@ -1,3 +1,4 @@
+import { Alert } from "react-native";
 import { axiosInstance } from "./axiosInstance";
 
 // Types for API responses
@@ -49,6 +50,29 @@ interface UpdateProfileResponse {
       profile_image_url?: string;
     };
     updated_fields: string[];
+  };
+}
+
+interface SocialLoginRequest {
+  email: string;
+  name: string;
+}
+
+interface SocialLoginResponse {
+  status: number;
+  message: string;
+  timestamp: string;
+  data: {
+    user: {
+      id: number;
+      first_name: string;
+      last_name: string;
+      email: string;
+      phone?: string;
+      address?: string;
+      profile_image?: string;
+      created_at: string | null;
+    };
   };
 }
 
@@ -211,6 +235,37 @@ export const updateProfileWithImageApi = async (
             statusText: error.response?.statusText
         });
         throw new Error(error.response?.data?.message || "Profile update with image failed");
+    }
+};
+
+// Social Login (Google Sign-In)
+// export const socialLoginApi = async (userData: SocialLoginRequest): Promise<SocialLoginResponse> => {
+//     try {
+//         logAPI('Making API call to social-login.php with data:', userData);
+//         logAPI('Base URL:', axiosInstance.defaults.baseURL);
+//         logAPI('Full URL:', `${axiosInstance.defaults.baseURL}/social-login.php`);
+        
+//         const res = await axiosInstance.post("/social-login.php", userData);
+//         logAPI('Social login API response:', res.data);
+//         return res.data;
+//     } catch (error: any) {
+//         logAPI('Social login API error details:', {
+//             message: error.message,
+//             response: error.response?.data,
+//             status: error.response?.status,
+//             statusText: error.response?.statusText,
+//             url: error.config?.url,
+//             baseURL: error.config?.baseURL
+//         });
+//         throw new Error(error.response?.data?.message || "Social login failed");
+//     }
+// };
+export const socialLoginApi = async (credentials: SocialLoginRequest) => {
+    try {
+        const res = await axiosInstance.post("/social-login.php", credentials);
+        return res.data;
+    } catch (error: any) {
+        throw new Error(error.response?.data?.message || "Social login failed");
     }
 };
 

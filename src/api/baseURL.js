@@ -1,10 +1,11 @@
 // export const API_BASE_URL = "http://localhost:3001/api/v1";
 // export const API_BASE_URL = "http://134.199.140.30:3001/api/v1";
-export const API_BASE_URL = "http://localhost:8888/virtus_pro/api";
+// export const API_BASE_URL = "http://localhost:8888/virtus_pro/api"; // Won't work on Android device/emulator
+export const API_BASE_URL = "http://192.168.100.15:8888/virtus_pro/api"; // Use your computer's IP address
 export const VIRTUS_API_URL = "https://virtus-lieferung.de/api/v2";
 
 // Image path utilities
-export const IMAGE_BASE_URL = "http://localhost:8888/virtus_pro";
+export const IMAGE_BASE_URL = "http://192.168.100.15:8888/virtus_pro";
 
 // Profile image path utilities
 export const getProfileImageUrl = (imageName) => {

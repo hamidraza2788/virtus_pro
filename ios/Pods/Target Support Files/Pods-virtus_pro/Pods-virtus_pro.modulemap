@@ -1,0 +1,6 @@
+module Pods_virtus_pro {
+  umbrella header "Pods-virtus_pro-umbrella.h"
+
+  export *
+  module * { export * }
+}
