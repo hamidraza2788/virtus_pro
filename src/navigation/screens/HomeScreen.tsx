@@ -5,7 +5,7 @@ import HomeHeader from '../../components/HomeHeader';
 import SearchBar from '../../components/SearchBar';
 import CategoryChips from '../../components/CategoryChips';
 import { Colors } from '../../utils';
-import FeaturedProductsCarousel from '../../components/FeaturedProductsCarousel';
+import FeaturedCategoriesCarousel from '../../components/FeaturedCategoriesCarousel';
 import SectionHeader from '../../components/SectionHeader';
 import TabChips from '../../components/TabChips';
 import ProductList from '../../components/ProductList';
@@ -21,7 +21,7 @@ const HomeScreen = () => {
         <HomeHeader />
         <SearchBar />
         {/* <CategoryChips /> */}
-        <FeaturedProductsCarousel />
+        <FeaturedCategoriesCarousel />
         <SectionHeader title={t('catalog.featured')} showSeeAll />
         {/* <TabChips /> */}
         <ProductList /> 

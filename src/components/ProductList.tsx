@@ -1,71 +1,114 @@
-import React from 'react';
-import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity, Platform } from 'react-native';
-import ImagePath from '../assets/images/ImagePath';
+import React, { useEffect } from 'react';
+import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity, Platform, ActivityIndicator } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { 
+  loadFeaturedProducts,
+  clearFeaturedProducts 
+} from '../redux/slices/featuredProductsSlice';
+import { FeaturedProduct } from '../api/featuredProductsApis';
 import { Colors } from '../utils';
 
-const products = [
-  {
-    id: '1',
-    title: 'Refrigeration',
-    desc: 'Designed to make the most of your kitchen',
-    price: '$10.21',
-    oldPrice: '$13.00',
-    image: ImagePath.Product11,
-    qty: 1,
-  },
-   {
-    id: '2',
-    title: 'Refrigeration',
-    desc: 'Designed to make the most of your kitchen',
-    price: '$10.21',
-    oldPrice: '$13.00',
-    image: ImagePath.Product22,
-    qty: 1,
-  },
-   {
-    id: '3',
-    title: 'Refrigeration',
-    desc: 'Designed to make the most of your kitchen',
-    price: '$10.21',
-    oldPrice: '$13.00',
-    image: ImagePath.Product33,
-    qty: 1,
-  },
-  // Add more product objects as needed
-];
+const ProductList = () => {
+  const navigation = useNavigation();
+  const dispatch = useAppDispatch();
+  const {
+    items: featuredProducts,
+    isLoading,
+    error
+  } = useAppSelector((state) => state.featuredProducts);
 
-const ProductList = () => (
-  <FlatList
-    data={products}
-    keyExtractor={item => item.id}
-    contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: Platform.OS === 'ios' ? 44 : 64 }}
-    renderItem={({ item }) => (
-      <View style={styles.card}>
-        <Image source={item.image} style={styles.image} />
-        <View style={{ flex: 1, marginLeft: 12 }}>
-          <Text style={styles.title}>{item.title}</Text>
-          <Text style={styles.desc}>{item.desc}</Text>
-          <View style={styles.row}>
-            <Text style={styles.price}>{item.price}</Text>
-            {/* <Text style={styles.oldPrice}>{item.oldPrice}</Text> */}
-          </View>
+  // Load featured products when component mounts
+  useEffect(() => {
+    console.log('ProductList: Loading featured products...');
+    dispatch(clearFeaturedProducts());
+    dispatch(loadFeaturedProducts('en')); // Default to English, can be made dynamic
+  }, [dispatch]);
+
+  // Handle product press
+  const handleProductPress = (product: FeaturedProduct) => {
+    console.log('Featured product pressed:', product.name);
+    
+    // Navigate to ProductDetailScreen with product ID
+    (navigation as any).navigate('ProductDetailScreen', {
+      productId: product.product_id,
+    });
+  };
+
+  // Render product item
+  const renderProductItem = ({ item }: { item: FeaturedProduct }) => (
+    <TouchableOpacity 
+      style={styles.card}
+      onPress={() => handleProductPress(item)}
+      activeOpacity={0.7}
+    >
+      <Image 
+        source={{ uri: item.images.featured }} 
+        style={styles.image}
+        resizeMode="cover"
+        onError={() => console.log('Image load error for:', item.name)}
+      />
+      <View style={{ flex: 1, marginLeft: 12 }}>
+        <Text style={styles.title} numberOfLines={1}>{item.name}</Text>
+        <Text style={styles.desc} numberOfLines={2}>{item.collection_name}</Text>
+        <View style={styles.row}>
+          <Text style={styles.price}>${item.price.trim()}</Text>
         </View>
-        {/* <View style={styles.qtyBox}>
-            <TouchableOpacity style={styles.minusBtn}>
-            <Text style={styles.minus}>-</Text>
-          </TouchableOpacity>
-          <Text style={styles.qty}>{item.qty}</Text>
-          <TouchableOpacity style={styles.plusBtn}>
-            <Text style={styles.plus}>+</Text>
-          </TouchableOpacity>
-        </View> */}
       </View>
-    )}
-     scrollEnabled={false} // <-- Add this line
-  />
-);
+    </TouchableOpacity>
+  );
+
+  // Render loading state
+  const renderLoading = () => {
+    if (!isLoading) return null;
+    
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="small" color={Colors.primary} />
+        <Text style={styles.loadingText}>Loading featured products...</Text>
+      </View>
+    );
+  };
+
+  // Render error state
+  const renderError = () => {
+    if (!error) return null;
+    
+    return (
+      <View style={styles.errorContainer}>
+        <Text style={styles.errorText}>Error loading featured products</Text>
+      </View>
+    );
+  };
+
+  return (
+    <View style={styles.container}>
+      {renderError()}
+      
+      {isLoading ? (
+        renderLoading()
+      ) : (
+        <FlatList
+          data={featuredProducts}
+          keyExtractor={(item, index) => `${item.product_id}-${index}`}
+          contentContainerStyle={styles.list}
+          renderItem={renderProductItem}
+          scrollEnabled={false}
+          showsVerticalScrollIndicator={false}
+        />
+      )}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  list: {
+    paddingHorizontal: 20,
+    paddingBottom: Platform.OS === 'ios' ? 44 : 64,
+  },
   card: {
     flexDirection: 'row',
     backgroundColor: Colors.White,
@@ -73,8 +116,8 @@ const styles = StyleSheet.create({
     padding: 12,
     marginBottom: 7,
     alignItems: 'center',
-    borderWidth:1,
-    borderColor:Colors.LightGray
+    borderWidth: 1,
+    borderColor: Colors.LightGray,
   },
   image: {
     width: 64,
@@ -143,6 +186,29 @@ const styles = StyleSheet.create({
     color: Colors.White,
     fontWeight: 'bold',
     fontSize: 14,
+  },
+  loadingContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 20,
+  },
+  loadingText: {
+    marginLeft: 10,
+    color: Colors.secondary,
+    fontSize: 14,
+  },
+  errorContainer: {
+    padding: 20,
+    backgroundColor: '#ffe6e6',
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#ffcccc',
+  },
+  errorText: {
+    color: '#d63031',
+    fontSize: 14,
+    textAlign: 'center',
   },
 });
 

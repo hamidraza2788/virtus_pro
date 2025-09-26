@@ -15,11 +15,11 @@ const SectionHeader: React.FC<Props> = ({ title, showSeeAll, onSeeAllPress }) =>
   return (
     <View style={styles.row}>
       <Text style={styles.title}>{title} <Text style={styles.emoji}>😍</Text></Text>
-      {showSeeAll && (
+      {/* {showSeeAll && (
         <TouchableOpacity onPress={onSeeAllPress}>
           <Text style={styles.seeAll}>{t('common.seeAll')}</Text>
         </TouchableOpacity>
-      )}
+      )} */}
     </View>
   );
 };

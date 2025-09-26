@@ -7,6 +7,7 @@ import languageSlice from './slices/languageSlice';
 import catalogSlice from './slices/catalogSlice';
 import subCategorySlice from './slices/subCategorySlice';
 import productsSlice from './slices/productsSlice';
+import featuredProductsSlice from './slices/featuredProductsSlice';
 import productDetailSlice from './slices/productDetailSlice';
 
 // Configuration for redux-persist
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   catalog: catalogSlice,
   subCategory: subCategorySlice,
   products: productsSlice,
+  featuredProducts: featuredProductsSlice,
   productDetail: productDetailSlice,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);

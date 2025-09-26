@@ -23,10 +23,7 @@ const FeaturedProductsCarousel = () => (
         <Image source={item.image} style={styles.image} />
         
         <Text style={styles.title}>{item.title}</Text>
-        <View style={styles.row}>
-          <Text style={styles.rating}>★ 4.7 Good</Text>
-          <Text style={styles.price}>$10</Text>
-        </View>
+       
       </View>
     )}
   />
@@ -68,7 +65,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
     paddingHorizontal: 12,
-    marginBottom: 2,
+    marginBottom: 10,
     color: Colors.Black,
   },
   row: {
