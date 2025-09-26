@@ -48,9 +48,7 @@ export interface SubCategoryRequest {
 
 // Custom logger for API calls
 const logAPI = (message: string, data?: any) => {
-  if (__DEV__) {
-    console.log(`[CATALOG API] ${message}`, data || '');
-  }
+  // Logging removed for production
 };
 
 /**

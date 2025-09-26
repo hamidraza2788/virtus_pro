@@ -14,7 +14,6 @@ const CatalogScreen = () => {
 
   // Load initial catalog data when component mounts
   useEffect(() => {
-    console.log('CatalogScreen: Loading initial catalog data...');
     dispatch(loadInitialCatalog());
   }, [dispatch]);
 

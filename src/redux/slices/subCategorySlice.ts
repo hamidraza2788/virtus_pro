@@ -9,9 +9,7 @@ import {
 
 // Custom logger for Redux
 const logRedux = (message: string, data?: any) => {
-  if (__DEV__) {
-    console.log(`[SUBCATEGORY REDUX] ${message}`, data || '');
-  }
+  // Logging removed for production
 };
 
 // Initial state

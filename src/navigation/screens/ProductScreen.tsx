@@ -56,8 +56,6 @@ const ProductScreen = () => {
 
   // Load initial products when component mounts
   useEffect(() => {
-    console.log('ProductScreen: Loading products for collection:', selectedCatalogue.collection_name || selectedCatalogue.name);
-    
     // Clear previous products data
     dispatch(clearProducts());
     
@@ -70,7 +68,6 @@ const ProductScreen = () => {
 
     return () => {
       // Cleanup when component unmounts
-      console.log('ProductScreen: Component unmounting, clearing products');
       dispatch(clearProducts());
     };
   }, [dispatch, selectedCatalogue.collection_name || selectedCatalogue.name, currentLanguage]);
@@ -83,7 +80,6 @@ const ProductScreen = () => {
   // Load more products when reaching the end
   const handleLoadMore = () => {
     if (!isLoadingMore && hasMoreItems) {
-      console.log('Loading more products...');
       dispatch(loadMoreProducts({
         collection_name: selectedCatalogue.collection_name || selectedCatalogue.name,
         currentOffset: products.length,
@@ -95,7 +91,6 @@ const ProductScreen = () => {
 
   // Refresh products data
   const handleRefresh = () => {
-    console.log('Refreshing products data...');
     dispatch(refreshProductsData({
       collection_name: selectedCatalogue.collection_name || selectedCatalogue.name,
       lang: currentLanguage,
@@ -105,7 +100,6 @@ const ProductScreen = () => {
 
   // Handle product press
   const handleProductPress = (product: Product) => {
-    console.log('Product pressed:', product.name);
     
     // Navigate to ProductDetailScreen with product ID
     (navigation as any).navigate('ProductDetailScreen', {
@@ -125,7 +119,7 @@ const ProductScreen = () => {
           source={{ uri: item.images.featured }}
           style={styles.image}
           resizeMode="cover"
-          onError={() => console.log('Image load error for:', item.name)}
+          onError={() => {}}
         />
         <View style={styles.productInfo}>
           <Text style={styles.title} numberOfLines={1}>

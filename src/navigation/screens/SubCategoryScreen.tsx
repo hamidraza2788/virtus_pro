@@ -53,7 +53,6 @@ const SubCategoryScreen = () => {
 
   // Load initial subcategories when component mounts
   useEffect(() => {
-    console.log('SubCategoryScreen: Loading subcategories for category:', categoryName);
     dispatch(clearSubCategories());
     dispatch(loadInitialSubCategories(categoryName));
   }, [dispatch, categoryName]);
@@ -61,7 +60,6 @@ const SubCategoryScreen = () => {
   // Load more items when reaching the end
   const handleLoadMore = () => {
     if (!isLoadingMore && hasMoreItems) {
-      console.log('Loading more subcategory items...');
       dispatch(loadMoreSubCategories({ 
         category: categoryName, 
         currentOffset: subCategoryItems.length 
@@ -71,14 +69,11 @@ const SubCategoryScreen = () => {
 
   // Refresh subcategory data
   const handleRefresh = () => {
-    console.log('Refreshing subcategory data...');
     dispatch(refreshSubCategoriesData(categoryName));
   };
 
   // Handle subcategory item press
   const handleSubCategoryPress = (subCategory: SubCategoryItem) => {
-    console.log('SubCategory item pressed:', subCategory.name);
-    console.log('Collection name:', subCategory.collection_name);
     
     // Navigate to ProductScreen with subcategory data
     (navigation as any).navigate('ProductScreen', {

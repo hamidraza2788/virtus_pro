@@ -41,9 +41,7 @@ export interface ProductsRequest {
 
 // Custom logger for API calls
 const logAPI = (message: string, data?: any) => {
-  if (__DEV__) {
-    console.log(`[PRODUCTS API] ${message}`, data || '');
-  }
+  // Logging removed for production
 };
 
 /**

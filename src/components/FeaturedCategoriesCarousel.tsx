@@ -34,13 +34,11 @@ const FeaturedCategoriesCarousel: React.FC<FeaturedCategoriesCarouselProps> = ({
 
   // Load initial catalog data when component mounts
   useEffect(() => {
-    console.log('FeaturedCategoriesCarousel: Loading initial catalog data...');
     dispatch(loadInitialCatalog());
   }, [dispatch]);
 
   // Handle category press
   const handleCategoryPress = (category: CatalogItem) => {
-    console.log('Category item pressed:', category.name);
     
     if (onCategoryPress) {
       onCategoryPress(category);

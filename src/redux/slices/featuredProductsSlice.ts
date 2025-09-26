@@ -8,9 +8,7 @@ import {
 
 // Custom logger for Redux
 const logRedux = (message: string, data?: any) => {
-  if (__DEV__) {
-    console.log(`[FEATURED PRODUCTS REDUX] ${message}`, data || '');
-  }
+  // Logging removed for production
 };
 
 // Initial state

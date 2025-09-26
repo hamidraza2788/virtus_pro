@@ -20,14 +20,12 @@ const ProductList = () => {
 
   // Load featured products when component mounts
   useEffect(() => {
-    console.log('ProductList: Loading featured products...');
     dispatch(clearFeaturedProducts());
     dispatch(loadFeaturedProducts('en')); // Default to English, can be made dynamic
   }, [dispatch]);
 
   // Handle product press
   const handleProductPress = (product: FeaturedProduct) => {
-    console.log('Featured product pressed:', product.name);
     
     // Navigate to ProductDetailScreen with product ID
     (navigation as any).navigate('ProductDetailScreen', {
@@ -46,7 +44,7 @@ const ProductList = () => {
         source={{ uri: item.images.featured }} 
         style={styles.image}
         resizeMode="cover"
-        onError={() => console.log('Image load error for:', item.name)}
+        onError={() => {}}
       />
       <View style={{ flex: 1, marginLeft: 12 }}>
         <Text style={styles.title} numberOfLines={1}>{item.name}</Text>

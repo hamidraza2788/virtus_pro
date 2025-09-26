@@ -44,20 +44,17 @@ const CatalogGrid: React.FC<CatalogGridProps> = ({ onCatalogPress }) => {
   // Load more items when reaching the end
   const handleLoadMore = () => {
     if (!isLoadingMore && hasMoreItems) {
-      console.log('Loading more catalog items...');
       dispatch(loadMoreCatalog(catalogItems.length));
     }
   };
 
   // Refresh catalog data
   const handleRefresh = () => {
-    console.log('Refreshing catalog data...');
     dispatch(refreshCatalogData());
   };
 
   // Handle catalog item press
   const handleCatalogPress = (catalog: CatalogItem) => {
-    console.log('Catalog item pressed:', catalog.name);
     
     if (onCatalogPress) {
       onCatalogPress(catalog);
